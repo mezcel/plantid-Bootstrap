@@ -8,10 +8,9 @@
 
 ## Demo:
 
-[Youtube](https://www.youtube.com/watch?v=d6cYrqyCk4o)
+> [Youtube](https://www.youtube.com/watch?v=d6cYrqyCk4o)
 
 ### Edit and Run Script:
 
-> * [Codeply](https://www.codeply.com/view/1JXIluLDW5)
-
-> * [Codepen](https://codepen.io/mezcel/pen/gRrjXP/)
+* [Codeply](https://www.codeply.com/view/1JXIluLDW5)
+* [Codepen](https://codepen.io/mezcel/pen/gRrjXP/)
