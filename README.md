@@ -1,7 +1,7 @@
 # plantid-Bootstrap
 ### A scaled down bootstrap version of a similar C# plant identification app I made a while back.
 
-testing branch - morphology ER Class edits
+testing branch - morphology ER Class edits mod
 
 ## Note:
 * GUI - Bootstrap
