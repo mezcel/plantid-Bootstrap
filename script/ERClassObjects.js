@@ -1206,8 +1206,6 @@ var leafMorph_inputArr=[];
 
 var i;
 for (i=1; i<leafMorph_inputArr.length; i+=1) {
-  // automated object inserts
-  // list of observations
   leafMorph.insert(
     {
         "leafMorphID": leafMorph_inputArr[i][0],
