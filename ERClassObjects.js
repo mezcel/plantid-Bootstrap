@@ -1228,5 +1228,4 @@ for (i=1; i<leafMorph_inputArr.length; i+=1) {
   );
 }
 
-//debu
 console.log(leafMorph_inputArr); //debug leafmorph array
