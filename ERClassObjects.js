@@ -1,4 +1,3 @@
-/* http://www.csvjson.com/sql2json */
 var plantclass = [
   {
     "plantclassID": 0,
@@ -1228,5 +1227,5 @@ for (i=1; i<leafMorph_inputArr.length; i+=1) {
   );
 }
 
-//debug
+//debu
 console.log(leafMorph_inputArr); //debug leafmorph array

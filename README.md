@@ -2,6 +2,7 @@
 ### A scaled down bootstrap version of a similar C# plant identification app I made a while back.
 
 testing branch - morphology ER Class edits mod
+edits on this branch are all through git via atom 
 
 ## Note:
 * GUI - Bootstrap
