@@ -60,11 +60,16 @@
             .colBorder{
                 border-left: solid;
             }
+            #btnPower {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 10px;
+            }
         </style>
     </head>
 
     <body>
-
         <!-- Nav Bar -->
         <nav class="navbar navbar-inverse navbar-fixed-top w3-green">
             <div class="container-fluid">
@@ -87,6 +92,9 @@
                                     <li><a href="http://www.github.com/mezcel" target="_blank" class="w3-white">Github</a></li>
                                 </ul>
                             </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" onclick="window.close(); audioClick4.play();" class="w3-text-white"><i class='fa fa-power-off'></i></a></li>
                         </ul>
                     </div>
                 </div>
