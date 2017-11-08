@@ -65,6 +65,7 @@ var returnSwitchQueryObj = function() {
 var switchFilterQuery = function() {
     var tempObj, i;
     var switchObj = returnSwitchQueryObj(); //return a list of flaged Foregin Keys
+    console.log("switchObj", switchObj);
 
     var returnQueryArr = leafMorph(switchObj).select("leafMorphID"); //retrieve the IDs of the morphology filter
 
@@ -74,14 +75,17 @@ var switchFilterQuery = function() {
     }
 
     var returnSpeciesArr = [];
+    var returnCommonNameArr = [];
     for (i = 0; i < species_FK.length; i+=1 ) {
         returnSpeciesArr[i] = species({speciesID:species_FK[i]}).select("speciesDescription"); //retrieve the names of the species ID
+        returnCommonNameArr.push(returnSpeciesArr[i][0]); //used for formatting common name display name
     }
+    returnCommonNameArr = _.uniq(returnCommonNameArr); //remove repeat common names
 
     $("#plantList").html(""); //clear display
     $("#plantList").append("<ul>");
-    for (i = 0; i < returnSpeciesArr.length; i+=1 ) {
-        $("#plantList").append("<li>"+returnSpeciesArr[i]+"</li>"); //display common names of matching plants
+    for (i = 0; i < returnCommonNameArr.length; i+=1 ) {
+        $("#plantList").append("<li>"+returnCommonNameArr[i]+"</li>"); //display common names of matching plants
     }
     $("#plantList").append("</ul>");
 
