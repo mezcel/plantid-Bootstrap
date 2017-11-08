@@ -35,6 +35,44 @@ var dispComboBoxDescription = function(classNameString, classNameObj) {
     });
 }
 
+var populateComboBoxInput = function(classNameString, classNameObj) { // used in index.html dropboxes
+    var i, queryArr, dbxOption, dropboxID, classAttributeObj, outputDispID;
+
+    dropboxID = "#dbx" + classNameString + "Input";
+    classAttributeObj = classNameString + 'Name';
+    outputDispID = "#value" + classNameString  + "Input";
+
+    queryArr = classNameObj().select(classAttributeObj);
+
+    for(i = 0; i < queryArr.length; i++) {
+        dbxOption = '<option value="'+ i + '">' + queryArr[i] + '</option>';
+        $(dropboxID).append(dbxOption);
+    }
+
+}
+
+var dispComboBoxDescriptionInput = function(classNameString, classNameObj) {
+    var dropboxID, classAttributeObj, outputDispID;
+
+    dropboxID = "#dbx" + classNameString  + "Input";
+    classAttributeObj = classNameString + 'Description';
+    outputDispID = "#value" + classNameString  + "Input";
+
+    $(dropboxID).change(function () {
+        var selectedValue, morphName, morphDescription;
+
+        selectedValue = $(this).val();
+        morphName = classNameObj().select(classNameString + 'Name');
+        $(outputDispID).text(morphName[selectedValue]);
+
+        morphDescription = classNameObj().select(classNameString + 'Description');
+        $(outputDispID).click(function(){
+            descriptionTextClass = ".descriptionvalue" + classNameString + "Input";
+            $(descriptionTextClass).html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue]);
+        });
+    });
+}
+
 var returnSwitchQueryObj = function() {
 
     var switchArr = [];
@@ -90,3 +128,64 @@ var switchFilterQuery = function() {
     $("#plantList").append("</ul>");
 
 }
+
+var populateLocalHerbariumQueryDropBoxes = function(){
+    //Populate Combo Boxes
+    populateComboBox('leafArrangement', leafArrangement);
+    populateComboBox('leafStructure', leafStructure);
+    populateComboBox('leafMargin', leafMargin);
+    populateComboBox('leafAttachment', leafAttachment);
+    populateComboBox('leafShape', leafShape);
+    populateComboBox('leafSurface', leafSurface);
+    populateComboBox('leafVenation', leafVenation);
+    populateComboBox('leafHairs', leafHairs);
+
+    //Combo Box Events
+    dispComboBoxDescription('leafArrangement', leafArrangement);
+    dispComboBoxDescription('leafStructure', leafStructure);
+    dispComboBoxDescription('leafMargin', leafMargin);
+    dispComboBoxDescription('leafAttachment', leafAttachment);
+    dispComboBoxDescription('leafShape', leafShape);
+    dispComboBoxDescription('leafSurface', leafSurface);
+    dispComboBoxDescription('leafVenation', leafVenation);
+    dispComboBoxDescription('leafHairs', leafHairs);
+
+    //perform fresh query when the drop box has changed value
+    $('select').change(function(){
+        switchFilterQuery();
+    });
+
+    //perform fresh query when the on/off is toggled
+    $('input').change(function(){
+        switchFilterQuery();
+    });
+}
+
+var populateMorphologyInputDropBoxes = function(){
+    //Populate Combo Boxes
+    populateComboBoxInput('leafArrangement', leafArrangement);
+    populateComboBoxInput('leafStructure', leafStructure);
+    populateComboBoxInput('leafMargin', leafMargin);
+    populateComboBoxInput('leafAttachment', leafAttachment);
+    populateComboBoxInput('leafShape', leafShape);
+    populateComboBoxInput('leafSurface', leafSurface);
+    populateComboBoxInput('leafVenation', leafVenation);
+    populateComboBoxInput('leafHairs', leafHairs);
+
+    //Combo Box Events
+    dispComboBoxDescriptionInput('leafArrangement', leafArrangement);
+    dispComboBoxDescriptionInput('leafStructure', leafStructure);
+    dispComboBoxDescriptionInput('leafMargin', leafMargin);
+    dispComboBoxDescriptionInput('leafAttachment', leafAttachment);
+    dispComboBoxDescriptionInput('leafShape', leafShape);
+    dispComboBoxDescriptionInput('leafSurface', leafSurface);
+    dispComboBoxDescriptionInput('leafVenation', leafVenation);
+    dispComboBoxDescriptionInput('leafHairs', leafHairs);
+}
+
+/*
+$(document).ready(function() {
+        populateLocalHerbariumQueryDropBoxes();
+        populateMorphologyInputDropBoxes();
+});
+*/

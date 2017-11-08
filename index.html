@@ -8,6 +8,7 @@
     	<link href="font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     	<link href="styles/w3.css" rel="stylesheet">
         <link href="styles/bootstrap-toggle.min.css" rel="stylesheet">
+        <link href="styles/myStyle.css" rel="stylesheet">
 
         <script src="script/jquery-3.2.1.min.js"></script>
 		<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
@@ -15,59 +16,8 @@
         <script src='script/taffy.js'></script>
         <script src='script/underscore-min.js'></script>
 
-    	<!--
-    		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    		<link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
-    		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css">
-
-    		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/taffydb/2.7.3/taffy-min.js"></script>
-        -->
         <!-- https://cdnjs.com/libraries/bootstrap-toggle -->
         <!-- https://cdnjs.com/libraries/taffydb -->
-
-
-        <style>
-            html{
-                padding: 5px;
-            }
-            body {
-                align-items: center;
-                background: #ccff66;
-                font-family: "Bitter", serif;
-                padding-top: 25px;
-            }
-            h1 {
-              color: #fff;
-              font-size: 2.5em;
-              text-shadow: 3px 2px 0 #03a9f4, 6px 5px 0 rgba(0, 0, 0, .15);
-            }
-            .cellObjWidth{
-                min-width: 100%;
-                border: solid gray .1px;
-            }
-            .morphDiv{
-                border: solid;
-                padding: 20px;
-            }
-            .rowLine{
-                padding-top: 5px;
-                padding-bottom: 0px;
-                border-bottom: solid 2px;
-            }
-            .colBorder{
-                border-left: solid;
-            }
-            #btnPower {
-                position: absolute;
-                top: 0;
-                right: 0;
-                padding: 10px;
-            }
-        </style>
     </head>
 
     <body>
@@ -85,17 +35,20 @@
                 <div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="http://mezcel.wixsite.com/plantmorphology/dendrology" class="w3-text-white">Leaf Observation</a></li>
-                            <li><a href="http://mezcel.wixsite.com/plantmorphology/herbaruim-database" class="w3-text-white">Herbarium</a></li>
+                            <li><a href="addObservation.html" class="w3-text-white">Add Local Observation</a></li>
+                            <li><a href="addObservation.html" class="w3-text-white">Remove Local Observation</a></li>
                             <li class="dropdown"><a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">About <span class="caret"></span></a>
                                 <ul class="dropdown-menu w3-text-white">
-                                    <li><a href="#section41" class="w3-white">Instructions</a></li>
-                                    <li><a href="http://www.github.com/mezcel" target="_blank" class="w3-white">Github</a></li>
+                                    <li><a href="#" class="w3-white">Instructions</a></li>
+                                    <li><a href="http://mezcel.wixsite.com/plantmorphology" target="_blank">Wiki</a></li>
+                                    <li><a href="http://mezcel.wixsite.com/plantmorphology/dendrology" target="_blank">Leaf Observations</a></li>
+                                    <li><a href="http://mezcel.wixsite.com/plantmorphology/herbaruim-database" target="_blank" >Herbarium</a></li>
+                                    <li><a href="http://www.github.com/mezcel/plantid-Bootstrap" target="_blank" class="w3-white">Github</a></li>
                                 </ul>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#" onclick="window.close(); audioClick4.play();" class="w3-text-white"><i class='fa fa-power-off'></i></a></li>
+                            <li><a href="#" onclick="window.close();" class="w3-text-white"><i class='fa fa-power-off'></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -208,40 +161,9 @@
         <!-- my scripts -->
         <script src='script/ERClassObjects.js'></script> <!-- initialize DB Class Objects -->
         <script src='script/myScript.js'></script> <!-- my function library -->
-
-        <!-- DOM Client Scripts -->
         <script>
             $(document).ready(function() {
-                //Populate Combo Boxes
-                populateComboBox('leafArrangement', leafArrangement);
-                populateComboBox('leafStructure', leafStructure);
-                populateComboBox('leafMargin', leafMargin);
-                populateComboBox('leafAttachment', leafAttachment);
-                populateComboBox('leafShape', leafShape);
-                populateComboBox('leafSurface', leafSurface);
-                populateComboBox('leafVenation', leafVenation);
-                populateComboBox('leafHairs', leafHairs);
-
-                //Combo Box Events
-                dispComboBoxDescription('leafArrangement', leafArrangement);
-                dispComboBoxDescription('leafStructure', leafStructure);
-                dispComboBoxDescription('leafMargin', leafMargin);
-                dispComboBoxDescription('leafAttachment', leafAttachment);
-                dispComboBoxDescription('leafShape', leafShape);
-                dispComboBoxDescription('leafSurface', leafSurface);
-                dispComboBoxDescription('leafVenation', leafVenation);
-                dispComboBoxDescription('leafHairs', leafHairs);
-
-                //perform fresh query when the drop box has changed value
-                $('select').change(function(){
-                    switchFilterQuery();
-                });
-
-                //perform fresh query when the on/off is toggled
-                $('input').change(function(){
-                    switchFilterQuery();
-                });
-
+                    populateLocalHerbariumQueryDropBoxes();
             });
         </script>
     </body>
