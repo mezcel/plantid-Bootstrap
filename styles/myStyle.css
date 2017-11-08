@@ -1,0 +1,36 @@
+html{
+    padding: 5px;
+}
+body {
+    align-items: center;
+    background: #ccff66;
+    font-family: "Bitter", serif;
+    padding-top: 25px;
+}
+h1 {
+  color: #fff;
+  font-size: 2.5em;
+  text-shadow: 3px 2px 0 #03a9f4, 6px 5px 0 rgba(0, 0, 0, .15);
+}
+.cellObjWidth{
+    min-width: 100%;
+    border: solid gray .1px;
+}
+.morphDiv{
+    border: solid;
+    padding: 20px;
+}
+.rowLine{
+    padding-top: 5px;
+    padding-bottom: 0px;
+    border-bottom: solid 2px;
+}
+.colBorder{
+    border-left: solid;
+}
+#btnPower {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
