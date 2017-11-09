@@ -233,11 +233,9 @@ var resetMorphologyInputs = function() {
     updateInputArrayPreview();
 
     //refresh dropDown
-    $('select').empty();
-    populateLocalHerbariumQueryDropBoxes();
-    populateMorphologyInputDropBoxes();
-
-
+    //$('select').empty();
+    //populateLocalHerbariumQueryDropBoxes();
+    //populateMorphologyInputDropBoxes();
 }
 
 /* Adding Record to Json DB */
