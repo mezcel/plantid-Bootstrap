@@ -34,3 +34,7 @@ h1 {
     right: 0;
     padding: 10px;
 }
+
+#addMorphologyForm{
+    /*display: none;*/
+}

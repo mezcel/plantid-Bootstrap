@@ -39,7 +39,13 @@ var populateComboBoxInput = function(classNameString, classNameObj) { // used in
     var i, queryArr, dbxOption, dropboxID, classAttributeObj, outputDispID;
 
     dropboxID = "#dbx" + classNameString + "Input";
-    classAttributeObj = classNameString + 'Name';
+
+    if (classNameString === "species") {
+        classAttributeObj = classNameString + 'Description'; // display common name
+    } else {
+        classAttributeObj = classNameString + 'Name';
+    }
+
     outputDispID = "#value" + classNameString  + "Input";
 
     queryArr = classNameObj().select(classAttributeObj);
@@ -90,7 +96,7 @@ var returnSwitchQueryObj = function() {
 
     if (switchArr[0]) {switchObj.push({'leafArrangement_FK' : parseInt($("#dbxleafArrangement").val())});}
     if (switchArr[1]) {switchObj.push({'leafStructure_FK' : parseInt($("#dbxleafStructure").val())});}
-    if (switchArr[2]) {switchObj.push({'leafMargin_FK'  : parseInt($("#dbxleafMargin").val())});}
+    if (switchArr[2]) {switchObj.push({'leafMargin_FK' : parseInt($("#dbxleafMargin").val())});}
     if (switchArr[3]) {switchObj.push({'leafAttachment_FK' : parseInt($("#dbxleafAttachment").val())});}
     if (switchArr[4]) {switchObj.push({'leafShape_FK' : parseInt($("#dbxleafShape").val())});}
     if (switchArr[5]) {switchObj.push({'leafSurfaceTop_FK' : parseInt($("#dbxleafSurface").val())});}
@@ -161,7 +167,9 @@ var populateLocalHerbariumQueryDropBoxes = function(){
     });
 }
 
-var populateMorphologyInputDropBoxes = function(){
+var populateMorphologyInputDropBoxes = function() {
+    populateComboBoxInput('species', species);
+
     //Populate Combo Boxes
     populateComboBoxInput('leafArrangement', leafArrangement);
     populateComboBoxInput('leafStructure', leafStructure);
@@ -181,11 +189,83 @@ var populateMorphologyInputDropBoxes = function(){
     dispComboBoxDescriptionInput('leafSurface', leafSurface);
     dispComboBoxDescriptionInput('leafVenation', leafVenation);
     dispComboBoxDescriptionInput('leafHairs', leafHairs);
+
+    $( "select" ).change(function() {
+        updateInputArrayPreview();
+    });
+
+    $('#btnAddMorphologyRecord').click(function(){
+        addMorphologyObservation(leafMorph);
+    });
 }
 
-/*
-$(document).ready(function() {
-        populateLocalHerbariumQueryDropBoxes();
-        populateMorphologyInputDropBoxes();
-});
-*/
+/* preview morphollogy input */
+var updateInputArrayPreview = function() {
+    $('#inputPreview').val(JSON.stringify(inputArrayObject()));
+    autosize($('textarea'));
+}
+
+var inputArrayObject = function() {
+    var inputObservationObj = [];
+    var leafMorphLength = leafMorph().select("leafMorphID").length;
+    leafMorphLength = leafMorphLength + 1; // the next record index
+
+    inputObservationObj.push({"leafMorphID":leafMorphLength});
+    inputObservationObj.push({"species_FK":parseInt($("#dbxspeciesInput").val())});
+    inputObservationObj.push({"leafArrangement_FK":parseInt($("#dbxleafArrangementInput").val())});
+    inputObservationObj.push({"leafStructure_FK":parseInt($("#dbxleafStructureInput").val())});
+    inputObservationObj.push({"leafMargin_FK":parseInt($("#dbxleafMarginInput").val())});
+    inputObservationObj.push({"leafAttachment_FK" : parseInt($("#dbxleafAttachmentInput").val())});
+    inputObservationObj.push({"leafShape_FK" : parseInt($("#dbxleafShapeInput").val())});
+    inputObservationObj.push({"leafApex_FK" : 0}); // unused in this example
+    inputObservationObj.push({"leafBase_FK" : 0}); // unused in this example
+    inputObservationObj.push({"leafSurfaceTop_FK" : parseInt($("#dbxleafSurfaceInput").val())});
+    inputObservationObj.push({"leafSurfaceBottom_FK" : 0}); // unused in this example
+    inputObservationObj.push({"leafVenation_FK" : parseInt($("#dbxleafVenationInput").val())});
+    inputObservationObj.push({"leafHairsTop_FK" : parseInt($("#dbxleafHairsInput").val())});
+    inputObservationObj.push({"leafHairsBottom_FK" : 0}); // unused in this example
+
+    return inputObservationObj;
+}
+
+var resetMorphologyInputs = function() {
+    $('select').prop('selectedIndex',0);
+    updateInputArrayPreview();
+
+    //refresh dropDown
+    $('select').empty();
+    populateLocalHerbariumQueryDropBoxes();
+    populateMorphologyInputDropBoxes();
+
+
+}
+
+/* Adding Record to Json DB */
+var addMorphologyObservation = function(leafMorph) {
+    var templeafMorphObj = inputArrayObject()[0];
+
+    leafMorph.insert({
+          "leafMorphID": templeafMorphObj.leafMorphID,
+          "species_FK": templeafMorphObj.species_FK,
+          "leafArrangement_FK": templeafMorphObj.leafArrangement_FK, //1
+          "leafStructure_FK": templeafMorphObj.leafStructure_FK,
+          "leafMargin_FK": templeafMorphObj.leafMargin_FK, //11
+          "leafAttachment_FK": templeafMorphObj.leafAttachment_FK,
+          "leafShape_FK": templeafMorphObj.leafShape_FK,
+          "leafApex_FK":templeafMorphObj.leafApex_FK,
+          "leafBase_FK":templeafMorphObj.leafBase_FK,
+          "leafSurfaceTop_FK": templeafMorphObj.leafSurfaceTop_FK,
+          "leafSurfaceBottom_FK": templeafMorphObj.leafSurfaceBottom_FK,
+          "leafVenation_FK": templeafMorphObj.leafVenation_FK,
+          "leafHairsTop_FK": templeafMorphObj.leafHairsTop_FK,
+          "leafHairsBottom_FK":templeafMorphObj.leafHairsBottom_FK
+     });
+
+     resetMorphologyInputs();
+}
+
+var showAdd = function() {
+    $( "#addMorphologyForm" ).toggle()
+    $( "#dropDownDivs" ).toggle()
+
+}

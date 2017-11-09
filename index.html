@@ -15,6 +15,7 @@
         <script src="script/bootstrap-toggle.min.js"></script>
         <script src='script/taffy.js'></script>
         <script src='script/underscore-min.js'></script>
+        <script src='script/autosize.js'></script>
 
         <!-- https://cdnjs.com/libraries/bootstrap-toggle -->
         <!-- https://cdnjs.com/libraries/taffydb -->
@@ -35,9 +36,9 @@
                 <div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="addObservation.html" class="w3-text-white">Add Local Observation</a></li>
-                            <li><a href="addObservation.html" class="w3-text-white">Remove Local Observation</a></li>
-                            <li class="dropdown"><a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">About <span class="caret"></span></a>
+                            <li><a href="addObservation.html" class="w3-text-white">Add Local Observation <i class="fa fa-plus-circle"></i></a></li>
+                            <li><a href="addObservation.html" class="w3-text-white">Remove Local Observation <i class="fa fa-minus-circle"></i></a></li>
+                            <li class="dropdown"><a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">About <i class="fa fa-info-circle"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu w3-text-white">
                                     <li><a href="#" class="w3-white">Instructions</a></li>
                                     <li><a href="http://mezcel.wixsite.com/plantmorphology" target="_blank">Wiki</a></li>
@@ -163,7 +164,7 @@
         <script src='script/myScript.js'></script> <!-- my function library -->
         <script>
             $(document).ready(function() {
-                    populateLocalHerbariumQueryDropBoxes();
+                populateLocalHerbariumQueryDropBoxes();
             });
         </script>
     </body>

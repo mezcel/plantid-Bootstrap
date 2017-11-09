@@ -14,6 +14,7 @@
         <script src="script/bootstrap-toggle.min.js"></script>
         <script src='script/taffy.js'></script>
         <script src='script/underscore-min.js'></script>
+        <script src='script/autosize.js'></script>
     </head>
 
     <body>
@@ -31,8 +32,8 @@
                 <div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="index.html" class="w3-text-white">Local Database (Back)</a></li>
-                            <li class="dropdown"><a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">About <span class="caret"></span></a>
+                            <li><a href="index.html" class="w3-text-white">Local Database <i class="fa fa-database"></i></a></li>
+                            <li class="dropdown"><a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">About <i class="fa fa-info-circle"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu w3-text-white">
                                     <li><a href="#" class="w3-white">Instructions</a></li>
                                     <li><a href="http://mezcel.wixsite.com/plantmorphology" target="_blank">Wiki</a></li>
@@ -47,55 +48,14 @@
             </div>
         </nav>
 
-        <div class="morphDiv">
+        <div id="addMorphologyForm" class="morphDiv">
             <div class='row rowLine'>
                 <div class='col-sm-12'><h3>Morphology Observation Inputs</h3></div>
             </div>
             <div class='row rowLine'>
-                <div class='col-sm-2'>
-                    <div class="form-group">
-                        <label for="ClassInput">Class:</label>
-                        <input type="text" class="form-control" id="ClassInput">
-                    </div>
-                </div>
-                <div class='col-sm-2'>
-                    <div class="form-group">
-                        <label for="OrderInput">Order:</label>
-                        <input type="text" class="form-control" id="OrderInput">
-                    </div>
-                </div>
-                <div class='col-sm-2'>
-                    <div class="form-group">
-                        <label for="FamilyInput">Family:</label>
-                        <input type="text" class="form-control" id="FamilyInput">
-                    </div>
-                </div>
-                <div class='col-sm-2'>
-                    <div class="form-group">
-                        <label for="GenusInput">Genus:</label>
-                        <input type="text" class="form-control" id="GenusInput">
-                    </div>
-                </div>
-                <div class='col-sm-2'>
-                    <div class="form-group">
-                        <label for="SpeciesInput">Species:</label>
-                        <input type="text" class="form-control" id="SpeciesInput">
-                    </div>
-                </div>
-            </div>
-            <div class='row rowLine'>
-                <div class='col-sm-4'>
-                    <div class="form-group">
-                        <label for="commonnameInput">Common Name:</label>
-                        <input type="text" class="form-control" id="commonnameInput">
-                    </div>
-                </div>
-                <div class='col-sm-4'>
-                    <div class="form-group">
-                        <label for="selfnamedInput">Self Named:</label>
-                        <input type="text" class="form-control" id="selfnamedInput">
-                    </div>
-                </div>
+                <div class='col-sm-2'>Known Plants:</div>
+                <div class='col-sm-6'><select class = "cellObjWidth w3-select"  id='dbxspeciesInput' name='dbxspeciesInput'></select></div>
+                <div class='col-sm-2'><i class="fa fa-leaf"></i></div>
             </div>
             <div class='row rowLine'>
                 <div class='col-sm-12'>
@@ -155,7 +115,7 @@
                             <span class='descriptionvalueleafVenationInput' class="w3-card"></span>
                         </div>
                     </div>
-                    <div class='row'>
+                    <div class='row rowLine'>
                     	<div class='col-sm-2'>Hairs:</div>
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafHairsInput' name='dbxleafHairsInput'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafHairsInput"></button></div>
@@ -165,7 +125,30 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <div class='row rowLine'>
+                    <div class="form-group">
+                        <label for="ClassInput">Debug Preview <i class="fa fa-search"></i>:</label>
+                        <textarea type="text" class="form-control" id="inputPreview"></textarea>
+                    </div>
+                </div>
+                <div class='row rowLine'>
+                    <div class='col-sm-6'>
+                        <div class="form-group">
+                            <label for="FamilyInput">Confirm:</label>
+                            <button id="btnAddMorphologyRecord">Add Record <i class="fa fa-sign-in"></i></button>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class="form-group">
+                            <label for="FamilyInput">Reset: </label>
+                            <button id="btnClearMorphologyRecord" onclick="resetMorphologyInputs()">Clear <i class="fa fa-eraser"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
 
         <!-- my scripts -->
         <script src='script/ERClassObjects.js'></script> <!-- initialize DB Class Objects -->
