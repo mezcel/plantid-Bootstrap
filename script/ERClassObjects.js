@@ -1,4 +1,7 @@
 /* http://www.csvjson.com/sql2json */
+localStorage.clear();
+//localStorage.removeItem("leafMorph");
+
 var plantclass = [
   {
     "plantclassID": 0,
@@ -1226,4 +1229,43 @@ for (i=1; i<leafMorph_inputArr.length; i+=1) {
   );
 }
 
-console.log("leafMorph_inputArr", leafMorph_inputArr); //debug leafmorph array
+/* store everything in a global var */
+
+//localStorage.clear();
+localStorage.removeItem("leafMorph");
+localStorage.removeItem("taffy_leafMorph");
+
+localStorage['plantclass'] = plantclass().stringify();
+localStorage['plantorder'] = plantorder().stringify();
+localStorage['family'] = family().stringify();
+localStorage['genus'] = genus().stringify();
+localStorage['species'] = species().stringify();
+localStorage['leafArrangement'] = leafArrangement().stringify();
+localStorage['leafStructure'] = leafStructure().stringify();
+localStorage['leafMargin'] = leafMargin().stringify();
+localStorage['leafAttachment'] = leafAttachment().stringify();
+localStorage['leafShape'] = leafShape().stringify();
+localStorage['leafSurface'] = leafSurface().stringify();
+localStorage['leafVenation'] = leafVenation().stringify();
+localStorage['leafHairs'] = leafHairs().stringify();
+localStorage['leafMorph'] = leafMorph().stringify();
+
+// Taffy Global Storage
+plantclass.store("plantclass");
+plantorder.store("plantorder");
+family.store("family");
+genus.store("genus");
+species.store("species");
+leafArrangement.store("leafArrangement");
+leafStructure.store("leafStructure");
+leafMargin.store("leafMargin");
+leafAttachment.store("leafAttachment");
+leafShape.store("leafShape");
+leafSurface.store("leafSurface");
+leafVenation.store("leafVenation");
+leafHairs.store("leafHairs");
+leafMorph.store("leafMorph");
+
+
+console.clear();
+console.log(leafMorph().get().length);
