@@ -3,7 +3,13 @@
 
 I use TaffyDB as my "no"sql ER workaround
 
-## Note:
+## Dev Status:
+* I restructured the DB mgnt. It now uses a messy cross DOM getter/setter-like local storage sharing.
+* The add Morphology is a bit sticky
+* I can now import a JSON file as well as scripted Json embedded object.
+* I still need a subtractive filter, right now it encourages an additive approach
+
+## Dependencies:
 * GUI - Bootstrap
 * DB - JS/JSON
 * query Engine - TaffyDB - [taffydb](http://taffydb.com/)
