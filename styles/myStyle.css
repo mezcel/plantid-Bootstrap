@@ -4,7 +4,7 @@ html{
 body {
     align-items: center;
     background: #ccff66;
-    font-family: "Bitter", serif;
+    font-family: "Cursive", serif;
     padding-top: 25px;
 }
 h1 {
@@ -37,4 +37,16 @@ h1 {
 
 #addMorphologyForm{
     /*display: none;*/
+}
+#dropDownDivs{
+    /*display: none;*/
+}
+
+.AbsoluteCenter {
+    position: absolute;
+    z-index: 15;
+    width: 50%;
+    top: 20%;
+    left: 25%;
+    padding: 20px;
 }
