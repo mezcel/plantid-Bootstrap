@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <title>Leaf Morphology</title>
-
         <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     	<link href="font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     	<link href="styles/w3.css" rel="stylesheet">
@@ -16,9 +15,6 @@
         <script src='script/taffy.js'></script>
         <script src='script/underscore-min.js'></script>
         <script src='script/autosize.js'></script>
-
-        <!-- https://cdnjs.com/libraries/bootstrap-toggle -->
-        <!-- https://cdnjs.com/libraries/taffydb -->
     </head>
 
     <body>
@@ -31,23 +27,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="#"><h1>Leaf Morphology</h1></a>
+                    <a data-toggle="modal" data-target="#importJsonModal"><h1>plantid-Bootstrap</h1></a>
                 </div>
                 <div>
                     <div class="collapse navbar-collapse" id="myNavbar">
-                        <ul class="nav navbar-nav">
-                            <li><a href="addObservation.html" class="w3-text-white">Add Local Observation <i class="fa fa-plus-circle"></i></a></li>
-                            <li><a href="addObservation.html" class="w3-text-white">Remove Local Observation <i class="fa fa-minus-circle"></i></a></li>
-                            <li class="dropdown"><a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">About <i class="fa fa-info-circle"></i><span class="caret"></span></a>
-                                <ul class="dropdown-menu w3-text-white">
-                                    <li><a href="#" class="w3-white">Instructions</a></li>
-                                    <li><a href="http://mezcel.wixsite.com/plantmorphology" target="_blank">Wiki</a></li>
-                                    <li><a href="http://mezcel.wixsite.com/plantmorphology/dendrology" target="_blank">Leaf Observations</a></li>
-                                    <li><a href="http://mezcel.wixsite.com/plantmorphology/herbaruim-database" target="_blank" >Herbarium</a></li>
-                                    <li><a href="http://www.github.com/mezcel/plantid-Bootstrap" target="_blank" class="w3-white">Github</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#" onclick="window.close();" class="w3-text-white"><i class='fa fa-power-off'></i></a></li>
                         </ul>
@@ -57,115 +40,28 @@
         </nav>
 
         <!-- Main Body -->
-        <div id='dropDownDivs' class="morphDiv">
-            <div class='row rowLine'>
-                <div class='col-sm-12'><h3>South Georgia - North Florida (Native Plants)</h3></div>
-            </div>
-            <div class='row rowLine'>
-                <div class='col-sm-9'>
-                    <div class='row rowLine'>
-                    	<div class='col-sm-3'>Arrangement:</div>
-                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafArrangement' name='dbxleafArrangement'></select></div>
-                    	<div class='col-sm-3'><button class="w3-btn w3-round cellObjWidth" id="valueleafArrangement"></button></div>
-                        <div class='col-sm-1'>
-                            <div class="checkbox">
-                                <label><input id="ckbleafArrangement" type="checkbox" data-toggle="toggle"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row rowLine'>
-                    	<div class='col-sm-3'>Structure:</div>
-                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafStructure' name='dbxleafStructure'></select></div>
-                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafStructure"></button></div>
-                        <div class='col-sm-1'>
-                            <div class="checkbox">
-                                <label><input id="ckbleafStructure" type="checkbox" data-toggle="toggle"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row rowLine'>
-                    	<div class='col-sm-3'>Margin:</div>
-                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafMargin' name='dbxleafMargin'></select></div>
-                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafMargin"></button></div>
-                        <div class='col-sm-1'>
-                            <div class="checkbox">
-                                <label><input id="ckbleafMargin" type="checkbox" data-toggle="toggle"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row rowLine'>
-                    	<div class='col-sm-3'>Attachment:</div>
-                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafAttachment' name='dbxleafAttachment'></select></div>
-                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafAttachment"></button></div>
-                        <div class='col-sm-1'>
-                            <div class="checkbox">
-                                <label><input id="ckbleafAttachment" type="checkbox" data-toggle="toggle"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row rowLine'>
-                    	<div class='col-sm-3'>Shape:</div>
-                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafShape' name='dbxleafShape'></select></div>
-                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafShape"></button></div>
-                        <div class='col-sm-1'>
-                            <div class="checkbox">
-                                <label><input id="ckbleafShape" type="checkbox" data-toggle="toggle"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row rowLine'>
-                    	<div class='col-sm-3'>Surface:</div>
-                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafSurface' name='dbxleafSurface'></select></div>
-                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafSurface"></button></div>
-                        <div class='col-sm-1'>
-                            <div class="checkbox">
-                                <label><input id="ckbleafSurface" type="checkbox" data-toggle="toggle"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row rowLine'>
-                    	<div class='col-sm-3'>Venation:</div>
-                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafVenation' name='dbxleafVenation'></select></div>
-                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafVenation"></button></div>
-                        <div class='col-sm-1'>
-                            <div class="checkbox">
-                                <label><input id="ckbleafVenation" type="checkbox" data-toggle="toggle"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row'>
-                	<div class='col-sm-3'>Hairs:</div>
-                	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafHairs' name='dbxleafHairs'></select></div>
-                	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafHairs"></button></div>
-                    <div class='col-sm-1'>
-                        <div class="checkbox">
-                            <label><input id="ckbleafHairs" type="checkbox" data-toggle="toggle"></label>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <div class='col-sm-3 '>
-                    <h2>Plant List:</h2>
-                    <div class="w3-panel w3-border-left w3-pale-green w3-border-red w3-card">
-                        <div id="plantList">Filtered list of plants ..</div>
-                    </div>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-12' >
-                    <h3><a name="descriptionAnchor" class="glyphicon glyphicon-link"></a> Description:</h3>
-                    <span id='dropDownDescription' class="w3-card"></span>
-                </div>
-            </div>
+        <div class="w3-green w3-round AbsoluteCenter">
+            <h2>Testbench Usecase:</h2>
+            <p>
+                <b>This app will filter through plant species based on observable leaf characteristics.</b> <i>The plant database is scalable based on Bological Plant Taxonomy and Leaf morphology.</i>
+            </p>
+            <p>
+                This Landing Page is Under Construction. A real UI demo wouldent even mess with this kind of interface. An application using Angular with Node would have been more appropriate.
+            </p>
+            <p>
+                For now I am just working out the kinks on this TaffyDB/Morphology usecase.
+            </p>
+            <h2>Feature Menu:</h2>
+            <ul>
+                <li><i class="fa fa-search"></i> <a href="morphologyFilter.html">morphologyFilter.html</a> </li>
+                <li><i class="glyphicon glyphicon-eye-open"></i> <a href="addObservation.html">addObservation.html</a> </li>
+
+            </ul>
         </div>
+
 
         <!-- my scripts -->
         <script src='script/ERClassObjects.js'></script> <!-- initialize DB Class Objects -->
-        <script src='script/myScript.js'></script> <!-- my function library -->
-        <script>
-            $(document).ready(function() {
-                populateLocalHerbariumQueryDropBoxes();
-            });
-        </script>
+
     </body>
 </html>
