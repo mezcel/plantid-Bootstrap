@@ -72,30 +72,26 @@ var switchFilterQuery = function(taffy_globalJson) {
     var tempObj, i;
 
     var switchObj = returnSwitchQueryObj(); //return a list of flaged Foregin Keys
-    console.log("switchObj", switchObj);
 
     var returnQueryArr = leafMorph(switchObj).select("leafMorphID"); //retrieve the IDs of the morphology filter
-    console.log("returnQueryArr", returnQueryArr);
 
     var species_FK = [];
 
     for (i = 0; i < returnQueryArr.length; i+=1 ) {
         species_FK[i] = leafMorph({leafMorphID: returnQueryArr[i]}).select("species_FK"); //retrieve foregin keys pointing to species ID
     }
-    console.log("species_FK", species_FK);
 
     var returnSpeciesArr = [];
     var returnCommonNameArr = [];
     var speciesDescription;
 
     for (i = 0; i < species_FK.length; i+=1 ) {
-        speciesDescription = species().select("speciesDescription")[i]; //retrieve the names of the species ID
+        speciesDescription = species().select("speciesDescription")[species_FK[i]]; //retrieve the names of the species ID
         //returnCommonNameArr.push(speciesDescription); //used for formatting common name display name
         returnCommonNameArr[i] = speciesDescription; //used for formatting common name display name
     }
-    console.log("returnCommonNameArr", returnCommonNameArr);
 
-    //returnCommonNameArr = _.uniq(returnCommonNameArr); //remove repeat common names
+    returnCommonNameArr = _.uniq(returnCommonNameArr); //remove repeat common names
 
     $("#plantList").html(""); //clear display
     $("#plantList").append("<ul>");
@@ -485,7 +481,6 @@ var populateDOMObjects = function(taffy_globalJson){
     if (thispage === 'morphologyFilter') {
         $('#fileinput').change(function(){
             loadJsonFile();
-
         });
 
         populateLocalHerbariumQueryDropBoxes(taffy_globalJson);
@@ -500,8 +495,6 @@ var populateDOMObjects = function(taffy_globalJson){
         });
 
         $('#btnAddMorphologyRecord').click(function(){
-            // addObservationtoTaffyDB();
-            // updatePreviewOfDbxArray();
             addMorphObservation();
         });
 
@@ -509,12 +502,9 @@ var populateDOMObjects = function(taffy_globalJson){
             resetMorphologyInputs();
         });
 
-        console.log("addObservation");
         $('#btnExportJsonFile').click(function(){
-            console.log("btnExportJsonFile");
             var taffy_globalJson = JSON.parse(localStorage.getItem('taffy_globalJson'));
             //var taffy_globalJson = localStorage.getItem('taffy_globalJson');
-            console.log(taffy_globalJson);
             exportToJsonFile(taffy_globalJson);
         });
     }
