@@ -27,12 +27,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="#"><h1>Append Leaf Observation</h1></a>
+                    <a href="#"><h1>Add Leaf Observation</h1></a>
                 </div>
                 <div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="morphologyFilter.html" class="w3-text-white">Local Database <i class="fa fa-database"></i></a></li>
+                            <li><a href="morphologyFilter.html" class="w3-text-white">App Herbarium <i class="fa fa-database"></i></a></li>
                             <li class="dropdown"><a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">info <i class="fa fa-info-circle"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu w3-text-white">
                                     <li><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#observationsInstructions">Instructions</button></li>
@@ -57,9 +57,12 @@
                 <div class='col-sm-12'><h3>Morphology Observation Inputs</h3></div>
             </div>
             <div class='row rowLine'>
-                <div class='col-sm-2'>Known Plant:</div>
+                <div class='col-sm-2'>A Known Plant:</div>
                 <div class='col-sm-6'><select class = "cellObjWidth w3-select"  id='dbxspecies' name='dbxspecies'></select></div>
-                <div class='col-sm-2'><i class="fa fa-leaf"></i></div>
+                <div class='col-sm-2'>
+                    <i class="fa fa-leaf"></i>
+                    <span class='descriptionvaluespeciesInput'></span>
+                </div>
             </div>
             <div class='row rowLine'>
                 <div class='col-sm-12'>
@@ -68,7 +71,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafArrangement' name='dbxleafArrangement'></select></div>
                     	<div class='col-sm-3'><button class="w3-btn w3-round cellObjWidth" id="valueleafArrangement"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafArrangementInput' class="w3-card"></span>
+                            <span class='descriptionvalueleafArrangementInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -76,7 +79,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafStructure' name='dbxleafStructure'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafStructure"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafStructureInput' class="w3-card"></span>
+                            <span class='descriptionvalueleafStructureInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -84,7 +87,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafMargin' name='dbxleafMargin'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafMargin"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafMarginInput' class="w3-card"></span>
+                            <span class='descriptionvalueleafMarginInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -92,7 +95,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafAttachment' name='dbxleafAttachment'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafAttachment"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafAttachmentInput' class="w3-card"></span>
+                            <span class='descriptionvalueleafAttachmentInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -100,7 +103,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafShape' name='dbxleafShape'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafShape"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafShapeInput' class="w3-card"></span>
+                            <span class='descriptionvalueleafShapeInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -108,7 +111,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafSurface' name='dbxleafSurface'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafSurface"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafSurfaceInput' class="w3-card"></span>
+                            <span class='descriptionvalueleafSurfaceInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -116,7 +119,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafVenation' name='dbxleafVenation'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafVenation"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafVenationInput' class="w3-card"></span>
+                            <span class='descriptionvalueleafVenationInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -124,7 +127,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafHairs' name='dbxleafHairs'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafHairs"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafHairsInput' class="w3-card"></span>
+                            <span class='descriptionvalueleafHairsInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                 </div>
@@ -137,16 +140,22 @@
                     </div>
                 </div>
                 <div class='row rowLine'>
-                    <div class='col-sm-6'>
+                    <div class='col-sm-4'>
                         <div class="form-group">
                             <label for="FamilyInput">Confirm:</label>
                             <button id="btnAddMorphologyRecord">Add Record <i class="fa fa-sign-in"></i></button>
                         </div>
                     </div>
-                    <div class='col-sm-6'>
+                    <div class='col-sm-4'>
                         <div class="form-group">
-                            <label for="FamilyInput">Reset: </label>
-                            <button id="btnClearMorphologyRecord" onclick="resetMorphologyInputs()">Clear <i class="fa fa-eraser"></i></button>
+                            <label for="FamilyInput">Reset Display: </label>
+                            <button id="btnClearMorphologyRecord">Clear <i class="fa fa-eraser"></i></button>
+                        </div>
+                    </div>
+                    <div class='col-sm-4'>
+                        <div class="form-group">
+                            <label for="FamilyInput">Output: </label>
+                            <button id="btnExportJsonFile" >Export JSON <i class="fa fa-database"></i></button>
                         </div>
                     </div>
                 </div>
@@ -175,18 +184,10 @@
         </div>
 
         <!-- my scripts -->
-        <!-- <script src='script/ERClassObjects.js'></script> --> <!-- initialize DB Class Objects -->
         <script src='script/myScript.js'></script> <!-- my function library -->
         <script>
             $(document).ready(function() {
-                // update localStorage
-                //resetLocalStorage2Taffy();
-                //resetTaffy2localStorage();
-                resetTaffy2localStoragetaffy();
-                populateMorphologyInputDropBoxes();
-
-                // activate percistance save
-
+                pageMain();
             });
         </script>
     </body>

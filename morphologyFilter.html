@@ -27,12 +27,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a data-toggle="modal" data-target="#importJsonModal"><h1>Leaf Morphology</h1></a>
+                    <a ><h1>Leaf Morphology</h1></a>
                 </div>
                 <div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="addObservation.html" class="w3-text-white">New Observation <i class="fa fa-plus-circle"></i></a></li>
+                            <li><a href="addObservation.html" class="w3-text-white">Add Observation <i class="fa fa-plus-circle"></i></a></li>
+                            <li><a href="javascript:void(0)" data-toggle="modal" data-target="#importJsonModal" class="w3-text-white">Import JSON <i class="fa fa-database"></i></a></li>
                             <li class="dropdown"><a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">info <i class="fa fa-info-circle"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu w3-text-white">
                                     <li><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#morphologyInstructions">Instructions</button></li>
@@ -109,7 +110,7 @@
                         </div>
                     </div>
                     <div class='row rowLine'>
-                    	<div class='col-sm-3'>Surface:</div>
+                    	<div class='col-sm-3'>Surface (Top):</div>
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafSurface' name='dbxleafSurface'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafSurface"></button></div>
                         <div class='col-sm-1'>
@@ -129,7 +130,7 @@
                         </div>
                     </div>
                     <div class='row'>
-                    	<div class='col-sm-3'>Hairs:</div>
+                    	<div class='col-sm-3'>Hairs (Top):</div>
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafHairs' name='dbxleafHairs'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafHairs"></button></div>
                         <div class='col-sm-1'>
@@ -183,19 +184,17 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Import Header</h4>
+                        <h4 class="modal-title">Import an appropriate Json file</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Import a DB.</p>
+                        <p>After selecting a file, click "Load" to confirm your selection.</p>
                         <form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
-
-                            <fieldset>
-                                <h2>Json File</h2>
-                                <input type='file' class="w3-round" id='fileinput'>
-                                <input type='button' class="w3-round" id='btnLoad' value='Load' onclick='loadFile();'>
-                            </fieldset>
+                            <div class='row'>
+                                <div class='col-sm-6' >
+                                    <input type='file' class="w3-blue w3-round" id='fileinput'>
+                                </div>
+                            </div>
                         </form>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -210,30 +209,7 @@
         <script src='script/myScript.js'></script> <!-- my function library -->
         <script>
             $(document).ready(function() {
-                // re-initialize TaffyDB on Page loadFile
-
-
-                plantclass = TAFFY(localStorage['plantclass']);
-                plantorder = TAFFY(localStorage['plantorder']);
-                family = TAFFY(localStorage['family']);
-                genus = TAFFY(localStorage['genus']);
-                species = TAFFY(localStorage['species']);
-                leafArrangement = TAFFY(localStorage['leafArrangement']);
-                leafStructure = TAFFY(localStorage['leafStructure']);
-                leafMargin = TAFFY(localStorage['leafMargin']);
-                leafAttachment = TAFFY(localStorage['leafAttachment']);
-                leafShape = TAFFY(localStorage['leafShape']);
-                leafSurface = TAFFY(localStorage['leafSurface']);
-                leafVenation = TAFFY(localStorage['leafVenation']);
-                leafHairs = TAFFY(localStorage['leafHairs']);
-                leafMorph = TAFFY(localStorage['leafMorph']);
-
-                populateLocalHerbariumQueryDropBoxes();
-                //leafMorph.store("leafMorph");
-
-                console.clear();
-                console.log(leafMorph().get().length);
-                console.log(localStorage['taffy_leafMorph']);
+                pageMain();
             });
         </script>
     </body>
