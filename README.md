@@ -12,12 +12,13 @@ I use TaffyDB as my "no"sql ER workaround
 * I now use ```localStorace``` as a pivot point while letting functions handle local data Manipulation
     * ```localStorage``` is intended to simulate a dedicated ```NoSql DB``` or some other "less risky" virtual server
 * I still need a subtractive filter, right now it encourages an additive approach
-* The ER is file, but I just discovered the Morphology records in the Demo needs to be fixed
-
+* The ER is fine, but I just discovered the Morphology records in the Demo needs to be fixed
+    * i mismatched my hand written data entry
+    * this is a usecase not a legit bio-app... yet
+    * this is a quick... yet tedious fix
+    
 ## Note:
-* I messed up the filter query update in the ```morphologyFilter```.html page
-* I know the problem is within ```switchFilterQuery()``` with respect to primary and foreign id numbers
-* this seems like a nice stop point
+* this seems like a usable nice stop point
 
 ## Dependencies:
 * GUI - Bootstrap
@@ -27,7 +28,7 @@ I use TaffyDB as my "no"sql ER workaround
 
 ## Demo:
 
-> [Youtube](https://www.youtube.com/watch?v=d6cYrqyCk4o)
+> [Youtube](https://www.youtube.com/watch?v=d6cYrqyCk4o) this was a demo on the first test run
 
 ### Edit and Run Script:
 Github has the most up to date version. The other versions are sandboxes for anyone who want to tinker with the code.
