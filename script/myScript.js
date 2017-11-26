@@ -1,65 +1,26 @@
-var populateComboBox = function(classNameString, classNameObj) {
-    var i, queryArr, dbxOption, dropboxID, classAttributeObj, outputDispID;
+/*  README
+    DOM UI Initializations
 
-    dropboxID = "#dbx" + classNameString;
-    if (classNameString === "species") {
-        classAttributeObj = classNameString + 'Description'; // display common name if available or "species"
-    } else {
-        classAttributeObj = classNameString + 'Name';
-    }
-    outputDispID = "#value" + classNameString;
+    Name scheme of the dropboxes:
+        dropbox id = "#dbx" + [field name of the json object class];
+        dropbox values = [field name of the json object class] + [json object array name]
+        drop box values are called by tag $('select')
 
-    queryArr = classNameObj().select(classAttributeObj);
+    Filte Switch:
+        the DOM switch state are consolodated into an array [0...n]
 
-    for(i = 0; i < queryArr.length; i++) {
-        dbxOption = '<option value="'+ i + '">' + queryArr[i] + '</option>';
-        $(dropboxID).append(dbxOption);
-    }
-}
+    Share data between web pages:
+        i just used localStorage to temporarily save between .html page reloads
+            Note: an AngularJS approach would have eliminated a need to do this
+                    i use Firefox more than Chrome, and I wanted the multiple html
+                    approach for modular development. I did not want to mess with
+                    Node, Grunt, Gulp, ect. for my testbench usecase
+            On each page load I must trigger TaffyDB's localStorage feature append
+                reinitialize my TaffyDB to ensure DB changes are consistent
+                throughout the session and site navigation
+*/
 
-var dispComboBoxDescription = function(classNameString, classNameObj) {
-    var dropboxID, classAttributeObj, outputDispID;
-
-    dropboxID = "#dbx" + classNameString;
-    classAttributeObj = classNameString + 'Description';
-    outputDispID = "#value" + classNameString;
-
-    $(dropboxID).change(function () {
-        var selectedValue, morphName, morphDescription;
-
-        selectedValue = $(this).val();
-        morphName = classNameObj().select(classNameString + 'Name');
-        $(outputDispID).text(morphName[selectedValue]);
-
-        morphDescription = classNameObj().select(classNameString + 'Description');
-        $(outputDispID).click(function(){
-            $('#dropDownDescription').html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue]);
-            location.href='#descriptionAnchor';
-        });
-    });
-}
-
-var dispComboBoxDescriptionInput = function(classNameString, classNameObj) {
-    var dropboxID, classAttributeObj, outputDispID;
-
-    dropboxID = "#dbx" + classNameString;
-    classAttributeObj = classNameString + 'Description';
-    outputDispID = "#value" + classNameString;
-
-    $(dropboxID).change(function () {
-        var selectedValue, morphName, morphDescription;
-
-        selectedValue = $(this).val();
-        morphName = classNameObj().select(classNameString + 'Name');
-        $(outputDispID).text(morphName[selectedValue]);
-
-        morphDescription = classNameObj().select(classNameString + 'Description');
-        $(outputDispID).click(function(){
-            descriptionTextClass = ".descriptionvalue" + classNameString + "Input";
-            $(descriptionTextClass).html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue]);
-        });
-    });
-}
+/* ************************** Start Switch Related ************************** */
 
 var returnSwitchQueryObj = function() {
 
@@ -76,36 +37,65 @@ var returnSwitchQueryObj = function() {
     switchArr[6] = $('#ckbleafVenation').is(':checked');
     switchArr[7] = $('#ckbleafHairs').is(':checked');
 
-    if (switchArr[0]) {switchObj.push({'leafArrangement_FK' : parseInt($("#dbxleafArrangement").val())});}
-    if (switchArr[1]) {switchObj.push({'leafStructure_FK' : parseInt($("#dbxleafStructure").val())});}
-    if (switchArr[2]) {switchObj.push({'leafMargin_FK' : parseInt($("#dbxleafMargin").val())});}
-    if (switchArr[3]) {switchObj.push({'leafAttachment_FK' : parseInt($("#dbxleafAttachment").val())});}
-    if (switchArr[4]) {switchObj.push({'leafShape_FK' : parseInt($("#dbxleafShape").val())});}
-    if (switchArr[5]) {switchObj.push({'leafSurfaceTop_FK' : parseInt($("#dbxleafSurface").val())});}
-    if (switchArr[6]) {switchObj.push({'leafVenation_FK' : parseInt($("#dbxleafVenation").val())});}
-    if (switchArr[7]) {switchObj.push({'leafHairsTop_FK' : parseInt($("#dbxleafHairs").val())});}
+    if (switchArr[0]) {
+        switchObj.push({'leafArrangement_FK' : parseInt($("#dbxleafArrangement").val())});
+    }
+    if (switchArr[1]) {
+        switchObj.push({'leafStructure_FK' : parseInt($("#dbxleafStructure").val())});
+    }
+    if (switchArr[2]) {
+        switchObj.push({'leafMargin_FK' : parseInt($("#dbxleafMargin").val())});
+    }
+    if (switchArr[3]) {
+        switchObj.push({'leafAttachment_FK' : parseInt($("#dbxleafAttachment").val())});
+    }
+    if (switchArr[4]) {
+        switchObj.push({'leafShape_FK' : parseInt($("#dbxleafShape").val())});
+    }
+    if (switchArr[5]) {
+        switchObj.push({'leafSurfaceTop_FK' : parseInt($("#dbxleafSurface").val())});
+    }
+    if (switchArr[6]) {
+        switchObj.push({'leafVenation_FK' : parseInt($("#dbxleafVenation").val())});
+    }
+    if (switchArr[7]) {
+        switchObj.push({'leafHairsTop_FK' : parseInt($("#dbxleafHairs").val())});
+    }
+
 
     return switchObj;
 }
 
-var switchFilterQuery = function() {
+var switchFilterQuery = function(taffy_globalJson) {
+    var species = TAFFY(taffy_globalJson.species);
+    var leafMorph = TAFFY(taffy_globalJson.leafMorph);
     var tempObj, i;
+
     var switchObj = returnSwitchQueryObj(); //return a list of flaged Foregin Keys
+    console.log("switchObj", switchObj);
 
     var returnQueryArr = leafMorph(switchObj).select("leafMorphID"); //retrieve the IDs of the morphology filter
+    console.log("returnQueryArr", returnQueryArr);
 
     var species_FK = [];
+
     for (i = 0; i < returnQueryArr.length; i+=1 ) {
         species_FK[i] = leafMorph({leafMorphID: returnQueryArr[i]}).select("species_FK"); //retrieve foregin keys pointing to species ID
     }
+    console.log("species_FK", species_FK);
 
     var returnSpeciesArr = [];
     var returnCommonNameArr = [];
+    var speciesDescription;
+
     for (i = 0; i < species_FK.length; i+=1 ) {
-        returnSpeciesArr[i] = species({speciesID:species_FK[i]}).select("speciesDescription"); //retrieve the names of the species ID
-        returnCommonNameArr.push(returnSpeciesArr[i][0]); //used for formatting common name display name
+        speciesDescription = species().select("speciesDescription")[i]; //retrieve the names of the species ID
+        //returnCommonNameArr.push(speciesDescription); //used for formatting common name display name
+        returnCommonNameArr[i] = speciesDescription; //used for formatting common name display name
     }
-    returnCommonNameArr = _.uniq(returnCommonNameArr); //remove repeat common names
+    console.log("returnCommonNameArr", returnCommonNameArr);
+
+    //returnCommonNameArr = _.uniq(returnCommonNameArr); //remove repeat common names
 
     $("#plantList").html(""); //clear display
     $("#plantList").append("<ul>");
@@ -116,87 +106,223 @@ var switchFilterQuery = function() {
 
 }
 
+
+
+/* *************************** End Switch Related *************************** */
+
+/* *********************** Start Drop Down Box Related ********************** */
+
+var dropdownDescriptionEventsQuery = function(classNameString, dropboxID, outputDispID, localDynamicTaffyDB) {
+    $(dropboxID).change(function () {
+        var selectedValue, morphName, morphDescription, btnName;
+        var selectedValue = $(this).val();
+
+        morphName = localDynamicTaffyDB().select(classNameString + 'Name');
+        $(outputDispID).text(morphName[selectedValue]);
+
+        morphDescription = localDynamicTaffyDB().select(classNameString + 'Description');
+
+        // dynamic description button event
+        $(outputDispID).click(function(){
+            $('#dropDownDescription').html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue]);
+            location.href='#descriptionAnchor';
+        });
+    });
+}
+
+// used for  morphologyFilter.html
+var dropdownMorphInput = function(classNameString, dropboxID, outputDispID, localDynamicTaffyDB) {
+
+    var dropDownDescription = ".descriptionvalue" + classNameString + "Input";
+
+    $(dropboxID).change(function () {
+        var selectedValue, morphName, morphDescription, btnName;
+        var selectedValue = $(this).val();
+
+        morphName = localDynamicTaffyDB().select(classNameString + 'Name');
+        $(outputDispID).text(morphName[selectedValue]);
+
+        if (dropDownDescription == '.descriptionvaluespeciesInput') {
+            // i need species symbol which is the same as genus and species
+            var speciesSymbol = localDynamicTaffyDB().select(classNameString + 'Symbol');
+
+            $(dropDownDescription).html("<i class='fa fa-leaf'></i>");
+
+            $(dropDownDescription).html(speciesSymbol[selectedValue] );
+
+        } else {
+            // i need morph name and morp desc
+            var morphDescription = localDynamicTaffyDB().select(classNameString + 'Description');
+
+            $(dropDownDescription).html("<i class='fa fa-pagelines'></i>");
+
+            $(outputDispID).click(function() {
+                $(dropDownDescription).html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue]);
+            });
+        }
+    });
+}
+
+var populateCbxAndDescBtn = function(taffy_globalJson) {
+    /* Note:
+        too many things are going on in this "function"
+        i am reading in a master json
+        parsing the json into it parts
+        populating DOM with json data depending on which page i am on
+        i am making DOM events for each <select> and <input> too
+        this funct may as well be a main(), lol
+    */
+    var key = "";
+    var classNameString, dropboxID, outputDispID, localDynamicTaffyDB;
+    var thispage = returnThisPageFileName(); // addObservation.html or morphologyFilter.html
+
+    for (key in taffy_globalJson) {
+        // break my json up into classes
+        if (taffy_globalJson.hasOwnProperty(key)) {
+            // on the real version i would use all the taxonomy for full query
+            if ((key !== 'plantclass')||(key !== 'plantorder')||(key !== 'family')||(key !== 'genus')) {
+                classNameString = key;
+                dropboxID = "#dbx" + key;
+                outputDispID = "#value" + classNameString;
+
+                if (classNameString === "species") {
+                    // applies only for addObservation.html
+                    classAttributeObj = classNameString + 'Description'; // display common name if available or "species"
+                } else {
+                    classAttributeObj = classNameString + 'Name';
+                }
+
+                // I am converting json to TaffyDB json just for "app wide logic technique" consistency
+                // this is the 'my ER technique philosophy' when I apply the TaffyDB framework
+                localDynamicTaffyDB = TAFFY(taffy_globalJson[classNameString]); // Ex: var leafArrangement = TAFFY(taffy_globalJson.leafArrangement);
+
+                // dynamic populate dropbox/dropdown content
+                for(var i = 0; i < localDynamicTaffyDB().get().length; i++) {
+
+                    var dbxOption = '<option value="'+ i + '">' + localDynamicTaffyDB().select(classAttributeObj)[i] + '</option>';
+                    $(dropboxID).append(dbxOption);
+
+                    if (thispage === 'morphologyFilter') {
+                        //for morphologyFilter.html
+                        dropdownDescriptionEventsQuery(classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
+                    } else {
+                        //for addObservation.html
+
+                        dropdownMorphInput(classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
+                    }
+                }
+
+            }
+        }
+    }
+}
+
 /* Initialize morphologyFilter.html */
-var populateLocalHerbariumQueryDropBoxes = function(){
-    //Populate Combo Boxes
-    populateComboBox('leafArrangement', leafArrangement);
-    populateComboBox('leafStructure', leafStructure);
-    populateComboBox('leafMargin', leafMargin);
-    populateComboBox('leafAttachment', leafAttachment);
-    populateComboBox('leafShape', leafShape);
-    populateComboBox('leafSurface', leafSurface);
-    populateComboBox('leafVenation', leafVenation);
-    populateComboBox('leafHairs', leafHairs);
+var populateLocalHerbariumQueryDropBoxes = function(taffy_globalJson) {
 
-    //Combo Box Events
-    dispComboBoxDescription('leafArrangement', leafArrangement);
-    dispComboBoxDescription('leafStructure', leafStructure);
-    dispComboBoxDescription('leafMargin', leafMargin);
-    dispComboBoxDescription('leafAttachment', leafAttachment);
-    dispComboBoxDescription('leafShape', leafShape);
-    dispComboBoxDescription('leafSurface', leafSurface);
-    dispComboBoxDescription('leafVenation', leafVenation);
-    dispComboBoxDescription('leafHairs', leafHairs);
+    // Emppty dropdown list combo box beofre entering data
+    // I should do an error catch prior... but i wil get back to that
+    $('select').empty();
 
-    //localStorage.clear();
-    //localStorage.removeItem("leafMorph");
+    //Populate Combo Boxes with its dropdown description event
+    populateCbxAndDescBtn(taffy_globalJson);
 
-    //perform fresh query when the drop box has changed value
+    // create event for a fresh query when the drop box has changed value
     $('select').change(function(){
-        switchFilterQuery();
+        switchFilterQuery(taffy_globalJson);
     });
 
-    //perform fresh query when the on/off is toggled
+    // create event for a query when the on/off is toggled
     $('input').change(function(){
-        switchFilterQuery();
+        switchFilterQuery(taffy_globalJson);
     });
-
-
 }
 
-/* Initialize addObservation.html */
-var populateMorphologyInputDropBoxes = function() {
+/* *********************** End Drop Down Box Related ************************ */
 
-    //Populate Combo Boxes
-    populateComboBox('species', species);
+/* ************************ Data Manipulation Relate ************************ */
 
-    populateComboBox('leafArrangement', leafArrangement);
-    populateComboBox('leafStructure', leafStructure);
-    populateComboBox('leafMargin', leafMargin);
-    populateComboBox('leafAttachment', leafAttachment);
-    populateComboBox('leafShape', leafShape);
-    populateComboBox('leafSurface', leafSurface);
-    populateComboBox('leafVenation', leafVenation);
-    populateComboBox('leafHairs', leafHairs);
+var jsonFile2TaffyDB = function(jsonFileVar) {
+    // clear all localStorage
+    localStorage.clear();
 
-    //Combo Box Events
-    dispComboBoxDescriptionInput('leafArrangement', leafArrangement);
-    dispComboBoxDescriptionInput('leafStructure', leafStructure);
-    dispComboBoxDescriptionInput('leafMargin', leafMargin);
-    dispComboBoxDescriptionInput('leafAttachment', leafAttachment);
-    dispComboBoxDescriptionInput('leafShape', leafShape);
-    dispComboBoxDescriptionInput('leafSurface', leafSurface);
-    dispComboBoxDescriptionInput('leafVenation', leafVenation);
-    dispComboBoxDescriptionInput('leafHairs', leafHairs);
+    // re define TaffyDB
+    var plantclass = TAFFY(jsonFileVar.plantclass);
+    var plantorder = TAFFY(jsonFileVar.plantorder);
+    var family = TAFFY(jsonFileVar.family);
+    var genus = TAFFY(jsonFileVar.genus);
+    var species = TAFFY(jsonFileVar.species);
+    var leafArrangement = TAFFY(jsonFileVar.leafArrangement);
+    var leafStructure = TAFFY(jsonFileVar.leafStructure);
+    var leafMargin = TAFFY(jsonFileVar.leafMargin);
+    var leafAttachment = TAFFY(jsonFileVar.leafAttachment);
+    var leafShape = TAFFY(jsonFileVar.leafShape);
+    var leafSurface = TAFFY(jsonFileVar.leafSurface);
+    var leafVenation = TAFFY(jsonFileVar.leafVenation);
+    var leafHairs = TAFFY(jsonFileVar.leafHairs);
 
-    // update preview only
-    updateInputArrayPreview();
+    var leafMorph = TAFFY(jsonFileVar.leafMorph);
+
+    // re init localStorage Taffy Global Storage
+    plantclass.store("plantclass");
+    plantorder.store("plantorder");
+    family.store("family");
+    genus.store("genus");
+    species.store("species");
+    leafArrangement.store("leafArrangement");
+    leafStructure.store("leafStructure");
+    leafMargin.store("leafMargin");
+    leafAttachment.store("leafAttachment");
+    leafShape.store("leafShape");
+    leafSurface.store("leafSurface");
+    leafVenation.store("leafVenation");
+    leafHairs.store("leafHairs");
+    leafMorph.store("leafMorph");
 }
 
-/* preview morphollogy input addObservation.html */
-var updateInputArrayPreview = function() {
-    var inputPreview = JSON.stringify(inputArrayObject());
-    $('#inputPreview').val(inputPreview);
-    autosize($('textarea'));
+// import json fie using FileReader in morphologyFilter.html
+var loadJsonFile = function() {
+
+    var input, file, fr;
+
+    if (typeof window.FileReader !== 'function') {
+        alert("The file API isn't supported on this browser yet.");
+        return;
+    }
+
+    input = document.getElementById('fileinput');
+
+    if (!input) {
+        alert("couldn't find the fileinput element.");
+    } else if (!input.files) {
+        alert("This browser doesn't seem to support the `files` property of file inputs.");
+    } else if (!input.files[0]) {
+        alert("Please select a file before clicking 'Load'");
+    } else {
+        file = input.files[0];
+        fr = new FileReader();
+        fr.onload = receivedText;
+        fr.readAsText(file);
+    }
+
+    function receivedText(e) {
+        // rebuild/replace default base TaffyDB
+        lines = e.target.result;
+        var jsonFileVar = JSON.parse(lines);
+
+        // save to global because its the easiest way to pass var out of fileInput
+        // keeping a consistent name for get/set overwrite
+        localStorage['taffy_globalJson'] = JSON.stringify(jsonFileVar);
+
+        populateDOMObjects(jsonFileVar);
+    }
 }
 
-// used to as confirmation/debug display
-// display purposes only addObservation.html
-var inputArrayObject = function() {
+// used to as confirmation/debug display display purposes only addObservation.html
+var inputMorphArrayDOM = function(leafMorphObjArr) {
     var inputObservationObj = [];
-    var leafMorphLength = leafMorph().select("leafMorphID").length;
+    var leafMorphLength = leafMorphObjArr.length;
     leafMorphLength = leafMorphLength + 1; // the next record index
-    console.log(leafMorphLength);
 
     inputObservationObj.push({"leafMorphID":leafMorphLength});
     inputObservationObj.push({"species_FK":parseInt($("#dbxspecies").val())});
@@ -215,10 +341,7 @@ var inputArrayObject = function() {
 
     return inputObservationObj;
 }
-
-// store the observation dropbox state as an obj var
-// used for current DB manipulation addObservation.html
-var inputDropBoxValueObject = function() {
+var insertLeafMorphLocal = function(leafMorph) {
 
     var dbxSelectionState = new Object();
 
@@ -240,14 +363,28 @@ var inputDropBoxValueObject = function() {
     return dbxSelectionState;
 }
 
+// preview morphollogy input addObservation.html
+var updateInputArrayPreview = function() {
+    // get curent leafMorphState from Global
+    var taffy_globalJson = JSON.parse(localStorage.getItem('taffy_globalJson'));
+
+    // pull out the ObjClass I want to use: leafMorphID
+    var leafMorphObjArr = taffy_globalJson.leafMorph;
+
+    var inputPreview = inputMorphArrayDOM(leafMorphObjArr);
+    inputPreview = JSON.stringify(inputPreview);
+    $('#inputPreview').val(inputPreview);
+    autosize($('textarea'));
+}
+
 var resetMorphologyInputs = function() {
-    $('select').prop('selectedIndex',0);
-    //update preview only
-    updateInputArrayPreview();
+    $('select').prop('selectedIndex',0); // reset to 1st dbx position
+    $('select').trigger('change',0); // trigger change event flag in order to triger other events
+    updateInputArrayPreview(); //update preview only
 }
 
 /* Adding Record to current Json DB addObservation.html */
-var localStorageAndTaffyDB = function() {
+var addMorphObservation = function() {
     /*
      * The Web Storage API provides mechanisms by which browsers can
      *    store key/value pairs, in a much more intuitive fashion than using cookies.
@@ -274,160 +411,127 @@ var localStorageAndTaffyDB = function() {
      * Pass in false to terminate storing the collection (data in localstorage will be unchanged).
      * Note: db().get() or db().stringify() will retturn a proper formatted TaffyDB Json obj
      */
+    var taffy_globalJson = JSON.parse(localStorage.getItem('taffy_globalJson'));
+    var leafMorph = TAFFY(taffy_globalJson.leafMorph);
+    var newObservation = insertLeafMorphLocal(leafMorph);
 
-    var newObservation = inputDropBoxValueObject();
     leafMorph.insert(newObservation);
+    taffy_globalJson.leafMorph = leafMorph().get();
+    localStorage.clear();
+    localStorage['taffy_globalJson'] = JSON.stringify(taffy_globalJson);
+    updateInputArrayPreview(); //update preview only
 }
 
-/* import/overwrite a fresh new json DB */
-// Used in morphologyFilter.html
-var loadFile = function() {
-    var input, file, fr;
+var exportToJsonFile = function(jsonData) {
+    var content = JSON.stringify(jsonData);
+    var uriContent = "data:application/json," + encodeURIComponent(content);
+    //var newWindow = window.open(uriContent, 'JSON');
+    window.open(uriContent, 'JSON');
 
-    if (typeof window.FileReader !== 'function') {
-        alert("The file API isn't supported on this browser yet.");
-        return;
+}
+
+/* ************************ End Manipulation Relate ************************* */
+
+/* ********************** Start Initialization Related ********************** */
+
+var initTaffyDBfromLocalStorage = function (taffy_globalJson) {
+    /* ************* Define Session TaffyDB ******************* */
+    //break myDemoJson down into TaffyDB ER-like classes
+
+    var plantclass = TAFFY(taffy_globalJson.plantclass);
+    var plantorder = TAFFY(taffy_globalJson.plantorder);
+    var family = TAFFY(taffy_globalJson.family);
+    var genus = TAFFY(taffy_globalJson.genus);
+    var species = TAFFY(taffy_globalJson.species);
+    var leafArrangement = TAFFY(taffy_globalJson.leafArrangement);
+    var leafStructure = TAFFY(taffy_globalJson.leafStructure);
+    var leafMargin = TAFFY(taffy_globalJson.leafMargin);
+    var leafAttachment = TAFFY(taffy_globalJson.leafAttachment);
+    var leafShape = TAFFY(taffy_globalJson.leafShape);
+    var leafSurface = TAFFY(taffy_globalJson.leafSurface);
+    var leafVenation = TAFFY(taffy_globalJson.leafVenation);
+    var leafHairs = TAFFY(taffy_globalJson.leafHairs);
+    var leafMorph = TAFFY(taffy_globalJson.leafMorph);
+
+    // configure existing json as a json with TaffyDB specific formatting
+
+    taffy_globalJson.species = species().get();
+    taffy_globalJson.leafArrangement = leafArrangement().get();
+    taffy_globalJson.leafStructure = leafStructure().get();
+    taffy_globalJson.leafMargin = leafMargin().get();
+    taffy_globalJson.leafAttachment = leafAttachment().get();
+    taffy_globalJson.leafShape = leafShape().get();
+    taffy_globalJson.leafSurface = leafSurface().get();
+    taffy_globalJson.leafVenation = leafVenation().get();
+    taffy_globalJson.leafHairs = leafHairs().get();
+    taffy_globalJson.leafMorph = leafMorph().get();
+
+    return taffy_globalJson;
+}
+
+var returnThisPageFileName = function() {
+
+    var parts = window.location.pathname.split( '/' );
+    var query = parts[parts.length-1].split( '.html' );
+        query[0] = query[0].replace(/-/g, " ");
+
+    // for this usecase, it will return eith morphologyFilter or addObservation
+    return query[0];
+}
+
+var populateDOMObjects = function(taffy_globalJson){
+    var thispage = returnThisPageFileName();
+
+    if (thispage === 'morphologyFilter') {
+        $('#fileinput').change(function(){
+            loadJsonFile();
+
+        });
+
+        populateLocalHerbariumQueryDropBoxes(taffy_globalJson);
+
+    } else if (thispage === 'addObservation') {
+        populateLocalHerbariumQueryDropBoxes(taffy_globalJson);
+
+        // page specific events
+
+        $('select').change(function() {
+            updateInputArrayPreview();
+        });
+
+        $('#btnAddMorphologyRecord').click(function(){
+            // addObservationtoTaffyDB();
+            // updatePreviewOfDbxArray();
+            addMorphObservation();
+        });
+
+        $('#btnClearMorphologyRecord').click(function(){
+            resetMorphologyInputs();
+        });
+
+        console.log("addObservation");
+        $('#btnExportJsonFile').click(function(){
+            console.log("btnExportJsonFile");
+            var taffy_globalJson = JSON.parse(localStorage.getItem('taffy_globalJson'));
+            //var taffy_globalJson = localStorage.getItem('taffy_globalJson');
+            console.log(taffy_globalJson);
+            exportToJsonFile(taffy_globalJson);
+        });
     }
 
-    input = document.getElementById('fileinput');
-    if (!input) {
-        alert("Um, couldn't find the fileinput element.");
-    } else if (!input.files) {
-        alert("This browser doesn't seem to support the `files` property of file inputs.");
-    } else if (!input.files[0]) {
-        alert("Please select a file before clicking 'Load'");
-    } else {
-        file = input.files[0];
-        fr = new FileReader();
-        fr.onload = receivedText;
-        fr.readAsText(file);
-    }
-
-    function receivedText(e) {
-        // rebuild/replace default base TaffyDB
-
-        lines = e.target.result;
-        var importedJsonObject = JSON.parse(lines);
-
-        // update localStorage
-        resetLocalStorage2Taffy();
-        resetTaffy2localStorage();
-
-    }
+    $('.myhomelink').click(function(){
+         localStorage.clear();
+         window.location='./index.html';
+    });
 }
 
-// update localStorage both Taffy and Traditional
-var updateMylocalStorage = function(){
-    // re-initialize TaffyDB on Page loadFile
-    plantclass = TAFFY(localStorage['plantclass']);
-    plantorder = TAFFY(localStorage['plantorder']);
-    family = TAFFY(localStorage['family']);
-    genus = TAFFY(localStorage['genus']);
-    species = TAFFY(localStorage['species']);
-    leafArrangement = TAFFY(localStorage['leafArrangement']);
-    leafStructure = TAFFY(localStorage['leafStructure']);
-    leafMargin = TAFFY(localStorage['leafMargin']);
-    leafAttachment = TAFFY(localStorage['leafAttachment']);
-    leafShape = TAFFY(localStorage['leafShape']);
-    leafSurface = TAFFY(localStorage['leafSurface']);
-    leafVenation = TAFFY(localStorage['leafVenation']);
-    leafHairs = TAFFY(localStorage['leafHairs']);
-    leafMorph = TAFFY(localStorage['leafMorph']);
+var pageMain = function(){
+    // get json from last localStorage definition
+    var taffy_globalJson = JSON.parse(localStorage.getItem('taffy_globalJson'));
 
     // re-initialize TaffyDB on Page loadFile
-
-    localStorage['plantclass'] = plantclass().stringify();
-    localStorage['plantorder'] = plantorder().stringify();
-    localStorage['family'] = family().stringify();
-    localStorage['genus'] = genus().stringify();
-    localStorage['species'] = species().stringify();
-    localStorage['leafArrangement'] = leafArrangement().stringify();
-    localStorage['leafStructure'] = leafStructure().stringify();
-    localStorage['leafMargin'] = leafMargin().stringify();
-    localStorage['leafAttachment'] = leafAttachment().stringify();
-    localStorage['leafShape'] = leafShape().stringify();
-    localStorage['leafSurface'] = leafSurface().stringify();
-    localStorage['leafVenation'] = leafVenation().stringify();
-    localStorage['leafHairs'] = leafHairs().stringify();
-    localStorage['leafMorph'] = leafMorph().stringify();
+    taffy_globalJson = initTaffyDBfromLocalStorage(taffy_globalJson);
+    populateDOMObjects(taffy_globalJson);
 }
 
-var resetTaffy2localStorage = function(){
-    // re-initialize TaffyDB on Page loadFile
-    plantclass = TAFFY(localStorage['plantclass']);
-    plantorder = TAFFY(localStorage['plantorder']);
-    family = TAFFY(localStorage['family']);
-    genus = TAFFY(localStorage['genus']);
-    species = TAFFY(localStorage['species']);
-    leafArrangement = TAFFY(localStorage['leafArrangement']);
-    leafStructure = TAFFY(localStorage['leafStructure']);
-    leafMargin = TAFFY(localStorage['leafMargin']);
-    leafAttachment = TAFFY(localStorage['leafAttachment']);
-    leafShape = TAFFY(localStorage['leafShape']);
-    leafSurface = TAFFY(localStorage['leafSurface']);
-    leafVenation = TAFFY(localStorage['leafVenation']);
-    leafHairs = TAFFY(localStorage['leafHairs']);
-    leafMorph = TAFFY(localStorage['leafMorph']);
-}
-
-var resetLocalStorage2Taffy = function(){
-    // re-initialize TaffyDB on Page loadFile
-
-    localStorage['plantclass'] = plantclass().stringify();
-    localStorage['plantorder'] = plantorder().stringify();
-    localStorage['family'] = family().stringify();
-    localStorage['genus'] = genus().stringify();
-    localStorage['species'] = species().stringify();
-    localStorage['leafArrangement'] = leafArrangement().stringify();
-    localStorage['leafStructure'] = leafStructure().stringify();
-    localStorage['leafMargin'] = leafMargin().stringify();
-    localStorage['leafAttachment'] = leafAttachment().stringify();
-    localStorage['leafShape'] = leafShape().stringify();
-    localStorage['leafSurface'] = leafSurface().stringify();
-    localStorage['leafVenation'] = leafVenation().stringify();
-    localStorage['leafHairs'] = leafHairs().stringify();
-    localStorage['leafMorph'] = leafMorph().stringify();
-}
-
-var resetTaffy2localStoragetaffy = function(){
-    // re-initialize TaffyDB on Page loadFile
-    plantclass = TAFFY(localStorage['taffy_plantclass']);
-    plantorder = TAFFY(localStorage['taffy_plantorder']);
-    family = TAFFY(localStorage['taffy_family']);
-    genus = TAFFY(localStorage['taffy_genus']);
-    species = TAFFY(localStorage['taffy_species']);
-    leafArrangement = TAFFY(localStorage['taffy_leafArrangement']);
-    leafStructure = TAFFY(localStorage['taffy_leafStructure']);
-    leafMargin = TAFFY(localStorage['taffy_leafMargin']);
-    leafAttachment = TAFFY(localStorage['taffy_leafAttachment']);
-    leafShape = TAFFY(localStorage['taffy_leafShape']);
-    leafSurface = TAFFY(localStorage['taffy_leafSurface']);
-    leafVenation = TAFFY(localStorage['taffy_leafVenation']);
-    leafHairs = TAFFY(localStorage['taffy_leafHairs']);
-    leafMorph = TAFFY(localStorage['taffy_leafMorph']);
-}
-
-
-$('.myhomelink').click(function(){
-     localStorage.clear();
-     window.location='./index.html';
-     //return false;
-});
-
-// update preview only
-$( "select" ).change(function() {
-    updateInputArrayPreview();
-});
-
-// update preview and lariables
-$('#btnAddMorphologyRecord').click(function(){
-    updateInputArrayPreview();
-
-    // re-initialize TaffyDB on Page loadFile
-    resetTaffy2localStorage();
-
-    localStorageAndTaffyDB();
-
-    // re-initialize TaffyDB on Page loadFile
-    resetLocalStorage2Taffy();
-});
+/* *********************** End Initialization Related *********************** */
