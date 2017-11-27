@@ -102,8 +102,6 @@ var switchFilterQuery = function(taffy_globalJson) {
 
 }
 
-
-
 /* *************************** End Switch Related *************************** */
 
 /* *********************** Start Drop Down Box Related ********************** */
@@ -133,23 +131,22 @@ var dropdownMorphInput = function(classNameString, dropboxID, outputDispID, loca
 
     $(dropboxID).change(function () {
         var selectedValue, morphName, morphDescription, btnName;
-        var selectedValue = $(this).val();
 
-        morphName = localDynamicTaffyDB().select(classNameString + 'Name');
-        $(outputDispID).text(morphName[selectedValue]);
+        selectedValue = $(this).val();
 
-        if (dropDownDescription == '.descriptionvaluespeciesInput') {
+        if (classNameString == 'species') {
             // i need species symbol which is the same as genus and species
-            var speciesSymbol = localDynamicTaffyDB().select(classNameString + 'Symbol');
+            speciesSymbol = localDynamicTaffyDB().select(classNameString + 'Symbol');
 
             $(dropDownDescription).html("<i class='fa fa-leaf'></i>");
-
             $(dropDownDescription).html(speciesSymbol[selectedValue] );
 
         } else {
             // i need morph name and morp desc
-            var morphDescription = localDynamicTaffyDB().select(classNameString + 'Description');
+            morphName = localDynamicTaffyDB().select(classNameString + 'Name');
+            morphDescription = localDynamicTaffyDB().select(classNameString + 'Description');
 
+            $(outputDispID).text(morphName[selectedValue]);
             $(dropDownDescription).html("<i class='fa fa-pagelines'></i>");
 
             $(outputDispID).click(function() {
@@ -160,6 +157,7 @@ var dropdownMorphInput = function(classNameString, dropboxID, outputDispID, loca
 }
 
 var populateCbxAndDescBtn = function(taffy_globalJson) {
+
     /* Note:
         too many things are going on in this "function"
         i am reading in a master json
@@ -194,20 +192,17 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
 
                 // dynamic populate dropbox/dropdown content
                 for(var i = 0; i < localDynamicTaffyDB().get().length; i++) {
-
                     var dbxOption = '<option value="'+ i + '">' + localDynamicTaffyDB().select(classAttributeObj)[i] + '</option>';
                     $(dropboxID).append(dbxOption);
 
                     if (thispage === 'morphologyFilter') {
-                        //for morphologyFilter.html
+                        // for morphologyFilter.html
                         dropdownDescriptionEventsQuery(classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
                     } else {
-                        //for addObservation.html
-
+                        // for addObservation.html
                         dropdownMorphInput(classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
                     }
                 }
-
             }
         }
     }
@@ -337,6 +332,7 @@ var inputMorphArrayDOM = function(leafMorphObjArr) {
 
     return inputObservationObj;
 }
+
 var insertLeafMorphLocal = function(leafMorph) {
 
     var dbxSelectionState = new Object();
