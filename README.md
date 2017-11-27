@@ -1,14 +1,14 @@
 # plantid-Bootstrap
 ### A scaled down bootstrap version of a similar C# plant identification app I made a while back.
 
-I use TaffyDB as my "no"sql ER workaround
+I use TaffyDB as my "nosql" ER-like workaround
 
 ## Tax Limitation
 * For simplicity I only Query the 'TOP' of the leaf. Proper leaf ID requires examination of the bottom as well.
 
 ## Dev Status:
 * I restructured the DB mgnt... again
-    * In my opinion, the .NET version was the easiest, quickest, and most reliable versions
+    * In my opinion, the .NET ```C#``` version was the easiest, quickest, and most reliable versions
     * the .NET version even has more features, and the features work and is stable
     * the html web browser version is the better looking and the lighter weight though
 * I converted many of my process obj to functions obj
@@ -19,6 +19,19 @@ I use TaffyDB as my "no"sql ER workaround
     * i mismatched my hand written data entry
     * this is a usecase not a legit bio-app... yet
     * this is a quick... yet tedious fix
+* Enclosed is a Demo Proof of concept testbench JSON titled ```fieldTestExample.json```
+    * The json was made using this app
+    * I did it really quick only using my eyes and memory of biology terms
+    * it is not intended to resemble the reality of taxonomic observation. Sometimes in real situations the same species is seen having different yet similar traits. Over many samples, the trends and averages tend to normalize consistency.
+    * I will continue to add a few more plants, but for now the following species are observed:
+        * ACRU
+        * ASAN
+        * CAAL
+        * CAAM
+        * COLF
+        * DIVI
+        * LIST
+        * MAAN
 
 ## Note:
 * this seems like a usable nice stop point
