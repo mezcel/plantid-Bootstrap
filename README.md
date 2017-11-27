@@ -3,6 +3,9 @@
 
 I use TaffyDB as my "no"sql ER workaround
 
+## Tax Limitation
+* For simplicity I only Query the 'TOP' of the leaf. Proper leaf ID requires examination of the bottom as well.
+
 ## Dev Status:
 * I restructured the DB mgnt... again
     * In my opinion, the .NET version was the easiest, quickest, and most reliable versions
@@ -16,7 +19,7 @@ I use TaffyDB as my "no"sql ER workaround
     * i mismatched my hand written data entry
     * this is a usecase not a legit bio-app... yet
     * this is a quick... yet tedious fix
-    
+
 ## Note:
 * this seems like a usable nice stop point
 
@@ -33,5 +36,8 @@ I use TaffyDB as my "no"sql ER workaround
 ### Edit and Run Script:
 Github has the most up to date version. The other versions are sandboxes for anyone who want to tinker with the code.
 
+The Github version is up to date and works as intended.
+
+> These demos are old and contain the old bugs. But it is responsive. It just doesn't yield the correct Query
 * [Codeply](https://www.codeply.com/view/1JXIluLDW5)
 * [Codepen](https://codepen.io/mezcel/pen/gRrjXP/)
