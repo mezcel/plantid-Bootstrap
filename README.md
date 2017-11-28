@@ -5,6 +5,8 @@ I use TaffyDB as my "nosql" ER-like workaround
 
 ## Tax Limitation
 * For simplicity I only Query the 'TOP' of the leaf. Proper leaf ID requires examination of the bottom as well.
+* I left pot the Apex and Base too
+* The C# version has the full version
 
 ## Dev Status:
 * I restructured the DB mgnt... again
