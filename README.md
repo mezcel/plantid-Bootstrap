@@ -1,5 +1,5 @@
 # plantid-Bootstrap
-### A scaled down bootstrap version of a similar C# plant identification app I made a while back.
+### A scaled down bootstrap version of a similar [C# plant identification app](https://github.com/mezcel/plantid) I made a while back.
 
 I use TaffyDB as my "nosql" ER-like workaround
 
