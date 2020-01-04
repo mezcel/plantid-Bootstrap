@@ -540,7 +540,7 @@ var myDemoJson = {
         {
             "leafArrangementID": "0",
             "leafArrangementName": "--- leaf attribute ---",
-            "leafArrangementDescription": ""
+            "leafArrangementDescription": "The arrangement of leaves on a stem is known as phyllotaxy. The number and placement of a plant’s leaves will vary depending on the species, with each species exhibiting a characteristic leaf arrangement."
         },
         {
             "leafArrangementID": "1",
@@ -587,7 +587,7 @@ var myDemoJson = {
         {
             "leafStructureID": "0",
             "leafStructureName": "--- leaf attribute ---",
-            "leafStructureDescription": ""
+            "leafStructureDescription": "Leaves may be categorized as simple or compound, depending on how their blade (or lamina) is divided."
         },
         {
             "leafStructureID": "1",
@@ -614,7 +614,7 @@ var myDemoJson = {
         {
             "leafMarginID": "0",
             "leafMarginName": "--- leaf attribute ---",
-            "leafMarginDescription": ""
+            "leafMarginDescription": "The leaf margin is the boundary area extending along the edge of the leaf."
         },
         {
             "leafMarginID": "1",
@@ -686,7 +686,7 @@ var myDemoJson = {
         {
             "leafAttachmentID": "0",
             "leafAttachmentName": "--- leaf attribute ---",
-            "leafAttachmentDescription": ""
+            "leafAttachmentDescription": "Leaf attachment describes the way the leaves are attached to the stem."
         },
         {
             "leafAttachmentID": "1",
@@ -1176,20 +1176,20 @@ var myDemoJson = {
 /* ************* Define Session TaffyDB ******************* */
 //break myDemoJson down into TaffyDB ER-like classes
 
-var plantclass = TAFFY(myDemoJson.plantclass);
-var plantorder = TAFFY(myDemoJson.plantorder);
-var family = TAFFY(myDemoJson.family);
-var genus = TAFFY(myDemoJson.genus);
-var species = TAFFY(myDemoJson.species);
+var plantclass		= TAFFY(myDemoJson.plantclass);
+var plantorder		= TAFFY(myDemoJson.plantorder);
+var family			= TAFFY(myDemoJson.family);
+var genus			= TAFFY(myDemoJson.genus);
+var species			= TAFFY(myDemoJson.species);
 var leafArrangement = TAFFY(myDemoJson.leafArrangement);
-var leafStructure = TAFFY(myDemoJson.leafStructure);
-var leafMargin = TAFFY(myDemoJson.leafMargin);
-var leafAttachment = TAFFY(myDemoJson.leafAttachment);
-var leafShape = TAFFY(myDemoJson.leafShape);
-var leafSurface = TAFFY(myDemoJson.leafSurface);
-var leafVenation = TAFFY(myDemoJson.leafVenation);
-var leafHairs = TAFFY(myDemoJson.leafHairs);
-var leafMorph = TAFFY(myDemoJson.leafMorph);
+var leafStructure	= TAFFY(myDemoJson.leafStructure);
+var leafMargin		= TAFFY(myDemoJson.leafMargin);
+var leafAttachment	= TAFFY(myDemoJson.leafAttachment);
+var leafShape		= TAFFY(myDemoJson.leafShape);
+var leafSurface		= TAFFY(myDemoJson.leafSurface);
+var leafVenation	= TAFFY(myDemoJson.leafVenation);
+var leafHairs		= TAFFY(myDemoJson.leafHairs);
+var leafMorph		= TAFFY(myDemoJson.leafMorph);
 
 
 
@@ -1197,10 +1197,11 @@ var leafMorph = TAFFY(myDemoJson.leafMorph);
 
 /* define demo input values in an array */
 var leafMorph_inputArr = [];
+
 leafMorph_inputArr[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 leafMorph_inputArr[1] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 leafMorph_inputArr[2] = [2, 7, 1, 1, 17, 6, 24, 13, 3, 2, 0, 7, 0, 0];
-leafMorph_inputArr[3] = [3, 9, 8, 7, 8, 6, 1, 13, 3, 2, 0, 7, 0, 7];
+leafMorph_inputArr[3] = [3, 9, 8, 4, 8, 6, 1, 13, 3, 2, 0, 7, 0, 7];
 leafMorph_inputArr[4] = [4, 10, 8, 7, 8, 6, 1, 13, 3, 2, 0, 7, 0, 7];
 leafMorph_inputArr[5] = [5, 11, 8, 7, 8, 6, 1, 3, 2, 2, 7, 7, 14, 7];
 leafMorph_inputArr[6] = [6, 12, 1, 1, 11, 6, 14, 13, 3, 2, 0, 7, 0, 0];
@@ -1209,7 +1210,7 @@ leafMorph_inputArr[8] = [8, 14, 1, 1, 8, 6, 5, 1, 2, 9, 7, 7, 0, 21];
 leafMorph_inputArr[9] = [9, 19, 1, 1, 8, 6, 15, 13, 1, 2, 7, 7, 0, 14];
 leafMorph_inputArr[10] = [10, 19, 1, 1, 8, 6, 14, 0, 0, 2, 0, 7, 0, 0];
 leafMorph_inputArr[11] = [11, 19, 1, 1, 8, 6, 14, 0, 0, 2, 0, 7, 0, 0];
-leafMorph_inputArr[12] = [12, 8, 8, 7, 8, 8, 1, 0, 0, 0, 0, 6, 0, 0];
+leafMorph_inputArr[12] = [12, 8, 8, 4, 8, 8, 1, 0, 0, 0, 0, 6, 0, 0];
 
 /* insert demo value into session TaffyDB */
 var i;
@@ -1217,6 +1218,7 @@ for (i = 1; i < leafMorph_inputArr.length; i += 1) {
     leafMorph.insert({
         "leafMorphID": leafMorph_inputArr[i][0],
         "species_FK": leafMorph_inputArr[i][1],
+
         "leafArrangement_FK": leafMorph_inputArr[i][2], //1
         "leafStructure_FK": leafMorph_inputArr[i][3],
         "leafMargin_FK": leafMorph_inputArr[i][4], //11
