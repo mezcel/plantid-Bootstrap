@@ -25,8 +25,6 @@
 var returnSwitchQueryObj = function() {
 
     var switchArr = [];
-    var switchObj = [];
-    var i;
 
     switchArr[0] = $('#ckbleafArrangement').is(':checked');
     switchArr[1] = $('#ckbleafStructure').is(':checked');
@@ -37,6 +35,9 @@ var returnSwitchQueryObj = function() {
     switchArr[6] = $('#ckbleafVenation').is(':checked');
     switchArr[7] = $('#ckbleafHairs').is(':checked');
 
+	// OR FILTER
+    /*
+    var switchObj = [];
     if (switchArr[0]) {
         switchObj.push({'leafArrangement_FK' : parseInt($("#dbxleafArrangement").val())});
     }
@@ -61,24 +62,55 @@ var returnSwitchQueryObj = function() {
     if (switchArr[7]) {
         switchObj.push({'leafHairsTop_FK' : parseInt($("#dbxleafHairs").val())});
     }
+    */
 
+    // AND FILTER
+    var switchObj = {};
+
+    if (switchArr[0]) {
+		switchObj.leafArrangement_FK = parseInt($("#dbxleafArrangement").val());
+    }
+    if (switchArr[1]) {
+		switchObj.leafStructure_FK = parseInt($("#dbxleafStructure").val());
+    }
+    if (switchArr[2]) {
+		switchObj.leafMargin_FK = parseInt($("#dbxleafMargin").val());
+    }
+    if (switchArr[3]) {
+		switchObj.leafAttachment_FK = parseInt($("#dbxleafAttachment").val());
+    }
+    if (switchArr[4]) {
+		switchObj.leafShape_FK = parseInt($("#dbxleafShape").val());
+    }
+    if (switchArr[5]) {
+		switchObj.leafSurfaceTop_FK = parseInt($("#dbxleafSurface").val());
+    }
+    if (switchArr[6]) {
+		switchObj.leafVenation_FK = parseInt($("#dbxleafVenation").val());
+    }
+    if (switchArr[7]) {
+		switchObj.leafHairsTop_FK = parseInt($("#dbxleafHairs").val());
+    }
 
     return switchObj;
 }
 
 var switchFilterQuery = function(taffy_globalJson) {
+	//console.clear();
+	$("#plantList").html(""); // clear display
+
     var species = TAFFY(taffy_globalJson.species);
     var leafMorph = TAFFY(taffy_globalJson.leafMorph);
-    var tempObj, i;
 
+	// checkbox flags
     var switchObj = returnSwitchQueryObj(); //return a list of flaged Foregin Keys
 
     var returnQueryArr = leafMorph(switchObj).select("leafMorphID"); //retrieve the IDs of the morphology filter
 
+	// All query matches
     var species_FK = [];
-
     for (i = 0; i < returnQueryArr.length; i+=1 ) {
-        species_FK[i] = leafMorph({leafMorphID: returnQueryArr[i]}).select("species_FK"); //retrieve foregin keys pointing to species ID
+        species_FK[i] = leafMorph({leafMorphID: returnQueryArr[i]}).distinct("species_FK"); //retrieve foreign keys pointing to species ID
     }
 
     var returnSpeciesArr = [];
@@ -86,19 +118,17 @@ var switchFilterQuery = function(taffy_globalJson) {
     var speciesDescription;
 
     for (i = 0; i < species_FK.length; i+=1 ) {
-        speciesDescription = species().select("speciesDescription")[species_FK[i]]; //retrieve the names of the species ID
+        speciesDescription = species().distinct("speciesDescription")[species_FK[i]]; //retrieve the names of the species ID
         //returnCommonNameArr.push(speciesDescription); //used for formatting common name display name
         returnCommonNameArr[i] = speciesDescription; //used for formatting common name display name
     }
 
+	// Final Filtered Display
     returnCommonNameArr = _.uniq(returnCommonNameArr); //remove repeat common names
 
-    $("#plantList").html(""); //clear display
-    $("#plantList").append("<ul>");
-    for (i = 0; i < returnCommonNameArr.length; i+=1 ) {
-        $("#plantList").append("<li>"+returnCommonNameArr[i]+"</li>"); //display common names of matching plants
-    }
-    $("#plantList").append("</ul>");
+	for (i = 0; i < returnCommonNameArr.length; i+=1 ) {
+		$("#plantList").append("<li>"+returnCommonNameArr[i]+"</li>"); //display common names of matching plants
+	}
 
 }
 
