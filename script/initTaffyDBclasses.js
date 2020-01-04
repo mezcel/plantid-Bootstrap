@@ -539,7 +539,7 @@ var myDemoJson = {
     "leafArrangement": [
         {
             "leafArrangementID": "0",
-            "leafArrangementName": "",
+            "leafArrangementName": "--- leaf attribute ---",
             "leafArrangementDescription": ""
         },
         {
@@ -586,7 +586,7 @@ var myDemoJson = {
     "leafStructure": [
         {
             "leafStructureID": "0",
-            "leafStructureName": "",
+            "leafStructureName": "--- leaf attribute ---",
             "leafStructureDescription": ""
         },
         {
@@ -613,7 +613,7 @@ var myDemoJson = {
     "leafMargin": [
         {
             "leafMarginID": "0",
-            "leafMarginName": "",
+            "leafMarginName": "--- leaf attribute ---",
             "leafMarginDescription": ""
         },
         {
@@ -685,7 +685,7 @@ var myDemoJson = {
     "leafAttachment": [
         {
             "leafAttachmentID": "0",
-            "leafAttachmentName": "",
+            "leafAttachmentName": "--- leaf attribute ---",
             "leafAttachmentDescription": ""
         },
         {
@@ -732,7 +732,7 @@ var myDemoJson = {
     "leafShape": [
         {
             "leafShapeID": "0",
-            "leafShapeName": "",
+            "leafShapeName": "--- leaf attribute ---",
             "leafShapeDescription": ""
         },
         {
@@ -844,7 +844,7 @@ var myDemoJson = {
     "leafSurface": [
         {
             "leafSurfaceID": "0",
-            "leafSurfaceName": "",
+            "leafSurfaceName": "--- leaf attribute ---",
             "leafSurfaceDescription": ""
         },
         {
@@ -911,7 +911,7 @@ var myDemoJson = {
     "leafVenation": [
         {
             "leafVenationID": "0",
-            "leafVenationName": "",
+            "leafVenationName": "--- leaf attribute ---",
             "leafVenationDescription": ""
         },
         {
@@ -963,7 +963,7 @@ var myDemoJson = {
     "leafHairs": [
         {
             "leafHairsID": "0",
-            "leafHairsName": "",
+            "leafHairsName": "--- leaf attribute ---",
             "leafHairsDescription": ""
         },
         {
