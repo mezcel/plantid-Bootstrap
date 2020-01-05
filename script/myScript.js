@@ -127,7 +127,7 @@ var switchFilterQuery = function(taffy_globalJson) {
     returnCommonNameArr = _.uniq(returnCommonNameArr); //remove repeat common names
 
 	for (i = 0; i < returnCommonNameArr.length; i+=1 ) {
-		$("#plantList").append("<li>"+returnCommonNameArr[i]+"</li>"); //display common names of matching plants
+		$("#plantList").append("<li><a class='w3-btn w3-button w3-block' href='https://www.google.com/search?client=firefox-b-1-e&q="+returnCommonNameArr[i]+", plant leaf' target='_blank'>"+returnCommonNameArr[i]+"</li>"); //display common names of matching plants
 	}
 
 }
