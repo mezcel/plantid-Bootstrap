@@ -18,7 +18,15 @@
         <script src='script/autosize.js'></script>
     </head>
 
-    <body>
+	<script type="text/javascript">
+		// web browser check
+		// page was designed to work in a mozilla or chromium based web browser
+		if ( ( navigator.userAgent.indexOf("firefox")>0 ) || ( navigator.userAgent.indexOf("chromium")>0 ) ) {
+			window.open("./404.html");
+		}
+	</script>
+
+    <body onload="checkbrowser();">
         <!-- Nav Bar -->
         <nav class="navbar navbar-inverse navbar-fixed-top w3-green">
             <div class="container-fluid">
@@ -49,12 +57,12 @@
 			</ul>
 			<hr>
             <h4>DB Actions:</h4>
-            <h3><i class="fa fa-search"></i> <a href="morphologyFilter.html">Leaf Morphology (Search Filter)</a></h3></li>
-            <h3><i class="glyphicon glyphicon-eye-open"></i> <a href="addObservation.html">Add Observations (Edit Database)</a></h3>
+            <h3><i class="fa fa-search"></i> <a href="morphologyFilter.html">Leaf Morphology (Search)</a></h3></li>
+            <h3><i class="glyphicon glyphicon-eye-open"></i> <a href="addObservation.html">Add Observations (Edit)</a></h3>
         </div>
 
         <!-- my scripts -->
         <script src='script/initTaffyDBclasses.js'></script> <!-- initialize DB Class Objects -->
-        <!-- <script src='script/myScript2.js'></script> -->
+
     </body>
 </html>
