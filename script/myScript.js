@@ -103,7 +103,7 @@ var switchFilterQuery = function(taffy_globalJson) {
     var leafMorph = TAFFY(taffy_globalJson.leafMorph);
 
 	// checkbox flags
-    var switchObj = returnSwitchQueryObj(); //return a list of flaged Foregin Keys
+    var switchObj = returnSwitchQueryObj(); //return a list of flagged Foreign Keys
 
     var returnQueryArr = leafMorph(switchObj).select("leafMorphID"); //retrieve the IDs of the morphology filter
 
@@ -149,7 +149,6 @@ var dropdownDescriptionEventsQuery = function(classNameString, dropboxID, output
         // dynamic description button event
         $(outputDispID).click(function(){
             $('#dropDownDescription').html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue]);
-            location.href='#descriptionAnchor';
         });
     });
 }
@@ -250,12 +249,17 @@ var populateLocalHerbariumQueryDropBoxes = function(taffy_globalJson) {
 
     // create event for a fresh query when the drop box has changed value
     $('select').change(function(){
+		// query results
         switchFilterQuery(taffy_globalJson);
     });
 
     // create event for a query when the on/off is toggled
     $('input').change(function(){
+		// query results
         switchFilterQuery(taffy_globalJson);
+
+        // modal popup
+        $("#queryResultModal").modal();
     });
 }
 
