@@ -31,9 +31,13 @@ var returnSwitchQueryObj = function() {
     switchArr[2] = $('#ckbleafMargin').is(':checked');
     switchArr[3] = $('#ckbleafAttachment').is(':checked');
     switchArr[4] = $('#ckbleafShape').is(':checked');
-    switchArr[5] = $('#ckbleafSurface').is(':checked');
-    switchArr[6] = $('#ckbleafVenation').is(':checked');
-    switchArr[7] = $('#ckbleafHairs').is(':checked');
+    switchArr[5] = $('#ckbleafShapeApex').is(':checked');
+    switchArr[6] = $('#ckbleafShapeBase').is(':checked');
+    switchArr[7] = $('#ckbleafSurface').is(':checked');
+    switchArr[8] = $('#ckbleafSurfaceBottom').is(':checked');
+    switchArr[9] = $('#ckbleafVenation').is(':checked');
+    switchArr[10] = $('#ckbleafHairs').is(':checked');
+    switchArr[11] = $('#ckbleafHairsBottom').is(':checked');
 
 	// OR FILTER
     /*
@@ -83,20 +87,32 @@ var returnSwitchQueryObj = function() {
 		switchObj.leafShape_FK = parseInt($("#dbxleafShape").val());
     }
     if (switchArr[5]) {
-		switchObj.leafSurfaceTop_FK = parseInt($("#dbxleafSurface").val());
+		switchObj.leafShape_FK = parseInt($("#dbxleafShapeApex").val());
     }
     if (switchArr[6]) {
-		switchObj.leafVenation_FK = parseInt($("#dbxleafVenation").val());
+		switchObj.leafShape_FK = parseInt($("#dbxleafShapeBase").val());
     }
     if (switchArr[7]) {
+		switchObj.leafSurfaceTop_FK = parseInt($("#dbxleafSurface").val());
+    }
+    if (switchArr[8]) {
+		switchObj.leafSurfaceBottom_FK = parseInt($("#dbxleafSurfaceBottom").val());
+    }
+    if (switchArr[9]) {
+		switchObj.leafVenation_FK = parseInt($("#dbxleafVenation").val());
+    }
+    if (switchArr[10]) {
 		switchObj.leafHairsTop_FK = parseInt($("#dbxleafHairs").val());
+    }
+    if (switchArr[11]) {
+		switchObj.leafHairsBottom_FK = parseInt($("#dbxleafHairsBottom").val());
     }
 
     return switchObj;
 }
 
 var switchFilterQuery = function(taffy_globalJson) {
-	//console.clear();
+	console.clear();
 	$("#plantList").html(""); // clear display
 
     var species = TAFFY(taffy_globalJson.species);
@@ -104,6 +120,7 @@ var switchFilterQuery = function(taffy_globalJson) {
 
 	// checkbox flags
     var switchObj = returnSwitchQueryObj(); //return a list of flagged Foreign Keys
+    console.log("Flagged dropdown and checkboxes:\n",switchObj);
 
     var returnQueryArr = leafMorph(switchObj).select("leafMorphID"); //retrieve the IDs of the morphology filter
 
@@ -127,7 +144,7 @@ var switchFilterQuery = function(taffy_globalJson) {
     returnCommonNameArr = _.uniq(returnCommonNameArr); //remove repeat common names
 
 	for (i = 0; i < returnCommonNameArr.length; i+=1 ) {
-		$("#plantList").append("<li><a class='w3-btn w3-button w3-block' href='https://www.google.com/search?client=firefox-b-1-e&q="+returnCommonNameArr[i]+", plant leaf' target='_blank'>"+returnCommonNameArr[i]+"</li>"); //display common names of matching plants
+		$("#plantList").append("<li><a class='w3-btn w3-button w3-block' href='https://www.google.com/search?q="+returnCommonNameArr[i]+", plant leaf' target='_blank'>"+returnCommonNameArr[i]+"</li>"); //display common names of matching plants
 	}
 
 }
@@ -138,6 +155,7 @@ var switchFilterQuery = function(taffy_globalJson) {
 
 var dropdownDescriptionEventsQuery = function(classNameString, dropboxID, outputDispID, localDynamicTaffyDB) {
     $(dropboxID).change(function () {
+
         var selectedValue, morphName, morphDescription, btnName;
         var selectedValue = $(this).val();
 
@@ -198,6 +216,12 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
     var key = "";
     var classNameString, dropboxID, outputDispID, localDynamicTaffyDB;
     var thispage = returnThisPageFileName(); // addObservation.html or morphologyFilter.html
+	console.clear();
+	console.log("populate dbx\n");
+
+	var shape_count = 2,
+		surface_count = 1,
+		hairs_count = 1;
 
     for (key in taffy_globalJson) {
         // break my json up into classes
@@ -208,12 +232,15 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
                 dropboxID = "#dbx" + key;
                 outputDispID = "#value" + classNameString;
 
+                //console.log("classNameString:",classNameString, "\ndropboxID:",dropboxID, "\noutputDispID:",outputDispID);
+
                 if (classNameString === "species") {
                     // applies only for addObservation.html
                     classAttributeObj = classNameString + 'Description'; // display common name if available or "species"
                 } else {
                     classAttributeObj = classNameString + 'Name';
                 }
+                console.log("\nclassAttributeObj:", classAttributeObj);
 
                 // I am converting json to TaffyDB json just for "app wide logic technique" consistency
                 // this is the 'my ER technique philosophy' when I apply the TaffyDB framework
@@ -222,7 +249,22 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
                 // dynamic populate dropbox/dropdown content
                 for(var i = 0; i < localDynamicTaffyDB().get().length; i++) {
                     var dbxOption = '<option value="'+ i + '">' + localDynamicTaffyDB().select(classAttributeObj)[i] + '</option>';
+
                     $(dropboxID).append(dbxOption);
+
+					// Extra copies of the same attribute for different parts of the leaf.
+                    if (dropboxID === "#dbxleafShape"){
+						$("#dbxleafShapeApex").append(dbxOption);
+						$("#dbxleafShapeBase").append(dbxOption);
+					}
+
+					if (dropboxID === "#dbxleafSurface"){
+						$("#dbxleafSurfaceBottom").append(dbxOption);
+					}
+
+					if (dropboxID === "#dbxleafHairs"){
+						$("#dbxleafHairsBottom").append(dbxOption);
+					}
 
                     if (thispage === 'morphologyFilter') {
                         // for morphologyFilter.html
@@ -356,13 +398,13 @@ var inputMorphArrayDOM = function(leafMorphObjArr) {
     inputObservationObj.push({"leafMargin_FK":parseInt($("#dbxleafMargin").val())});
     inputObservationObj.push({"leafAttachment_FK" : parseInt($("#dbxleafAttachment").val())});
     inputObservationObj.push({"leafShape_FK" : parseInt($("#dbxleafShape").val())});
-    inputObservationObj.push({"leafApex_FK" : 0}); // unused in this example
-    inputObservationObj.push({"leafBase_FK" : 0}); // unused in this example
+    inputObservationObj.push({"leafApex_FK" : parseInt($("#dbxleafShapeApex").val())}); // unused in this example
+    inputObservationObj.push({"leafBase_FK" : parseInt($("#dbxleafShapeBase").val())}); // unused in this example
     inputObservationObj.push({"leafSurfaceTop_FK" : parseInt($("#dbxleafSurface").val())});
-    inputObservationObj.push({"leafSurfaceBottom_FK" : 0}); // unused in this example
+    inputObservationObj.push({"leafSurfaceBottom_FK" : parseInt($("#dbxleafSurfaceBottom").val())}); // unused in this example
     inputObservationObj.push({"leafVenation_FK" : parseInt($("#dbxleafVenation").val())});
     inputObservationObj.push({"leafHairsTop_FK" : parseInt($("#dbxleafHairs").val())});
-    inputObservationObj.push({"leafHairsBottom_FK" : 0}); // unused in this example
+    inputObservationObj.push({"leafHairsBottom_FK" : parseInt($("#dbxleafHairsBottom").val())}); // unused in this example
 
     return inputObservationObj;
 }
@@ -378,13 +420,13 @@ var insertLeafMorphLocal = function(leafMorph) {
     dbxSelectionState["leafMargin_FK"] = parseInt($("#dbxleafMargin").val());
     dbxSelectionState["leafAttachment_FK" ] = parseInt($("#dbxleafAttachment").val());
     dbxSelectionState["leafShape_FK" ] = parseInt($("#dbxleafShape").val());
-    dbxSelectionState["leafApex_FK" ] = 0; // unused in this example
-    dbxSelectionState["leafBase_FK" ] = 0; // unused in this example
+    dbxSelectionState["leafApex_FK" ] = parseInt($("#dbxleafShapeApex").val()); // unused in this example
+    dbxSelectionState["leafBase_FK" ] = parseInt($("#dbxleafShapeBase").val()); // unused in this example
     dbxSelectionState["leafSurfaceTop_FK" ] = parseInt($("#dbxleafSurface").val());
-    dbxSelectionState["leafSurfaceBottom_FK" ] = 0; // unused in this example
+    dbxSelectionState["leafSurfaceBottom_FK" ] = parseInt($("#dbxleafSurfaceBottom").val()); // unused in this example
     dbxSelectionState["leafVenation_FK" ] = parseInt($("#dbxleafVenation").val());
     dbxSelectionState["leafHairsTop_FK" ] = parseInt($("#dbxleafHairs").val());
-    dbxSelectionState["leafHairsBottom_FK" ] = 0; // unused in this example
+    dbxSelectionState["leafHairsBottom_FK" ] = parseInt($("#dbxleafHairs").val()); // unused in this example
 
     return dbxSelectionState;
 }
