@@ -112,7 +112,6 @@ var returnSwitchQueryObj = function() {
 }
 
 var switchFilterQuery = function(taffy_globalJson) {
-	console.clear();
 	$("#plantList").html(""); // clear display
 
     var species = TAFFY(taffy_globalJson.species);
@@ -120,7 +119,6 @@ var switchFilterQuery = function(taffy_globalJson) {
 
 	// checkbox flags
     var switchObj = returnSwitchQueryObj(); //return a list of flagged Foreign Keys
-    console.log("Flagged dropdown and checkboxes:\n",switchObj);
 
     var returnQueryArr = leafMorph(switchObj).select("leafMorphID"); //retrieve the IDs of the morphology filter
 
@@ -143,8 +141,12 @@ var switchFilterQuery = function(taffy_globalJson) {
 	// Final Filtered Display
     returnCommonNameArr = _.uniq(returnCommonNameArr); //remove repeat common names
 
-	for (i = 0; i < returnCommonNameArr.length; i+=1 ) {
-		$("#plantList").append("<li><a class='w3-btn w3-button w3-block' href='https://www.google.com/search?q="+returnCommonNameArr[i]+", plant leaf' target='_blank'>"+returnCommonNameArr[i]+"</li>"); //display common names of matching plants
+	if (typeof(returnCommonNameArr[0]) != "undefined") {
+		for (i = 0; i < returnCommonNameArr.length; i+=1 ) {
+			$("#plantList").append("<li><a class='w3-btn w3-button w3-block' href='https://www.google.com/search?q="+returnCommonNameArr[i]+", plant leaf' target='_blank'>"+returnCommonNameArr[i]+"</li>"); //display common names of matching plants
+		}
+	} else {
+		$("#plantList").append("no matches.<br>change or remove any of the query option settings");
 	}
 
 }
@@ -166,7 +168,7 @@ var dropdownDescriptionEventsQuery = function(classNameString, dropboxID, output
 
         // dynamic description button event
         $(outputDispID).click(function(){
-            $('#dropDownDescription').html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue]);
+            $('#dropDownDescription').html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue] + " <a href='https://www.google.com/search?q=" + morphName[selectedValue] + ", plant leaf' target='_blank'><i><u class='w3-text-blue'>online examples</u></i></a>");
         });
     });
 }
@@ -216,12 +218,6 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
     var key = "";
     var classNameString, dropboxID, outputDispID, localDynamicTaffyDB;
     var thispage = returnThisPageFileName(); // addObservation.html or morphologyFilter.html
-	console.clear();
-	console.log("populate dbx\n");
-
-	var shape_count = 2,
-		surface_count = 1,
-		hairs_count = 1;
 
     for (key in taffy_globalJson) {
         // break my json up into classes
@@ -232,15 +228,12 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
                 dropboxID = "#dbx" + key;
                 outputDispID = "#value" + classNameString;
 
-                //console.log("classNameString:",classNameString, "\ndropboxID:",dropboxID, "\noutputDispID:",outputDispID);
-
                 if (classNameString === "species") {
                     // applies only for addObservation.html
                     classAttributeObj = classNameString + 'Description'; // display common name if available or "species"
                 } else {
                     classAttributeObj = classNameString + 'Name';
                 }
-                console.log("\nclassAttributeObj:", classAttributeObj);
 
                 // I am converting json to TaffyDB json just for "app wide logic technique" consistency
                 // this is the 'my ER technique philosophy' when I apply the TaffyDB framework
@@ -253,22 +246,29 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
                     $(dropboxID).append(dbxOption);
 
 					// Extra copies of the same attribute for different parts of the leaf.
-                    if (dropboxID === "#dbxleafShape"){
-						$("#dbxleafShapeApex").append(dbxOption);
-						$("#dbxleafShapeBase").append(dbxOption);
+                    if (dropboxID === "#dbxleafShape") {
+						$(dropboxID.concat("Apex")).append(dbxOption);
+						$(dropboxID.concat("Base")).append(dbxOption);
 					}
 
-					if (dropboxID === "#dbxleafSurface"){
-						$("#dbxleafSurfaceBottom").append(dbxOption);
-					}
-
-					if (dropboxID === "#dbxleafHairs"){
-						$("#dbxleafHairsBottom").append(dbxOption);
+					if ( (dropboxID === "#dbxleafSurface") || (dropboxID === "#dbxleafHairs") ) {
+						$(dropboxID.concat("Bottom")).append(dbxOption);
 					}
 
                     if (thispage === 'morphologyFilter') {
                         // for morphologyFilter.html
                         dropdownDescriptionEventsQuery(classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
+
+						// Extra copies of the same attribute for different parts of the leaf.
+                        if (dropboxID === "#dbxleafShape") {
+							dropdownDescriptionEventsQuery(classNameString, dropboxID.concat("Apex"), outputDispID.concat("Apex"), localDynamicTaffyDB);
+							dropdownDescriptionEventsQuery(classNameString, dropboxID.concat("Base"), outputDispID.concat("Base"), localDynamicTaffyDB);
+						}
+
+						if ( (dropboxID === "#dbxleafSurface") || (dropboxID === "#dbxleafHairs") ) {
+							dropdownDescriptionEventsQuery(classNameString, dropboxID.concat("Bottom"), outputDispID.concat("Bottom"), localDynamicTaffyDB);
+						}
+
                     } else {
                         // for addObservation.html
                         dropdownMorphInput(classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
@@ -290,18 +290,30 @@ var populateLocalHerbariumQueryDropBoxes = function(taffy_globalJson) {
     populateCbxAndDescBtn(taffy_globalJson);
 
     // create event for a fresh query when the drop box has changed value
-    $('select').change(function(){
-		// query results
-        switchFilterQuery(taffy_globalJson);
-    });
-
-    // create event for a query when the on/off is toggled
-    $('input').change(function(){
+    $('select').change(function() {
 		// query results
         switchFilterQuery(taffy_globalJson);
 
         // modal popup
-        $("#queryResultModal").modal();
+        if ( $("#plantList li:nth-child(1) a:nth-child(1)").text() !== "" ){
+			// if exclusive matches are found
+			$("#queryResultModal").modal();
+		}
+        //$("#queryResultModal").modal();
+
+        console.log( $("#plantList li:nth-child(1) a:nth-child(1)").text() );
+    });
+
+    // create event for a query when the on/off is toggled
+    $('input').change(function() {
+		// query results
+        switchFilterQuery(taffy_globalJson);
+
+		// modal popup
+        if ( $("#plantList li:nth-child(1) a:nth-child(1)").text() !== "" ){
+			// if exclusive matches are found
+			$("#queryResultModal").modal();
+		}
     });
 }
 
