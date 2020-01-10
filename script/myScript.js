@@ -174,9 +174,10 @@ var dropdownDescriptionEventsQuery = function(classNameString, dropboxID, output
 }
 
 // used for  morphologyFilter.html
-var dropdownMorphInput = function(classNameString, dropboxID, outputDispID, localDynamicTaffyDB) {
+var dropdownMorphInput = function(side, classNameString, dropboxID, outputDispID, localDynamicTaffyDB) {
 
-    var dropDownDescription = ".descriptionvalue" + classNameString + "Input";
+    //var dropDownDescription = ".descriptionvalue" + classNameString + "Input";
+    var dropDownDescription = ".descriptionvalue" + classNameString + side;
 
     $(dropboxID).change(function () {
         var selectedValue, morphName, morphDescription, btnName;
@@ -271,7 +272,18 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
 
                     } else {
                         // for addObservation.html
-                        dropdownMorphInput(classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
+                        dropdownMorphInput("", classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
+
+						// Extra copies of the same attribute for different parts of the leaf.
+                        if (dropboxID === "#dbxleafShape") {
+							dropdownMorphInput("Apex", classNameString, dropboxID.concat("Apex"), outputDispID.concat("Apex"), localDynamicTaffyDB);
+							dropdownMorphInput("Base", classNameString, dropboxID.concat("Base"), outputDispID.concat("Base"), localDynamicTaffyDB);
+						}
+
+
+                        if ( (dropboxID === "#dbxleafSurface") || (dropboxID === "#dbxleafHairs") ) {
+							dropdownMorphInput("Bottom", classNameString, dropboxID.concat("Bottom"), outputDispID.concat("Bottom"), localDynamicTaffyDB);
+						}
                     }
                 }
             }
@@ -301,7 +313,6 @@ var populateLocalHerbariumQueryDropBoxes = function(taffy_globalJson) {
 		}
         //$("#queryResultModal").modal();
 
-        console.log( $("#plantList li:nth-child(1) a:nth-child(1)").text() );
     });
 
     // create event for a query when the on/off is toggled
@@ -438,7 +449,7 @@ var insertLeafMorphLocal = function(leafMorph) {
     dbxSelectionState["leafSurfaceBottom_FK" ] = parseInt($("#dbxleafSurfaceBottom").val()); // unused in this example
     dbxSelectionState["leafVenation_FK" ] = parseInt($("#dbxleafVenation").val());
     dbxSelectionState["leafHairsTop_FK" ] = parseInt($("#dbxleafHairs").val());
-    dbxSelectionState["leafHairsBottom_FK" ] = parseInt($("#dbxleafHairs").val()); // unused in this example
+    dbxSelectionState["leafHairsBottom_FK" ] = parseInt($("#dbxleafHairsBottom").val()); // unused in this example
 
     return dbxSelectionState;
 }

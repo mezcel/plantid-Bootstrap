@@ -62,7 +62,7 @@
                 <div class='col-sm-6'><select class = "cellObjWidth w3-select"  id='dbxspecies' name='dbxspecies'></select></div>
                 <div class='col-sm-2'>
                     <i class="fa fa-leaf"></i>
-                    <span class='descriptionvaluespeciesInput'></span>
+                    <span class='descriptionvaluespecies'></span>
                 </div>
             </div>
             <div class='row rowLine'>
@@ -72,7 +72,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafArrangement' name='dbxleafArrangement'></select></div>
                     	<div class='col-sm-3'><button class="w3-btn w3-round cellObjWidth" id="valueleafArrangement"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafArrangementInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                            <span class='descriptionvalueleafArrangement' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -80,7 +80,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafStructure' name='dbxleafStructure'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafStructure"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafStructureInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                            <span class='descriptionvalueleafStructure' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -88,7 +88,7 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafMargin' name='dbxleafMargin'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafMargin"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafMarginInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                            <span class='descriptionvalueleafMargin' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -96,23 +96,49 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafAttachment' name='dbxleafAttachment'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafAttachment"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafAttachmentInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                            <span class='descriptionvalueleafAttachment' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
-                    	<div class='col-sm-2'>Shape:</div>
+                    	<div class='col-sm-2 w3-green'>Shape:</div>
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafShape' name='dbxleafShape'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafShape"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafShapeInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                            <span class='descriptionvalueleafShape' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                        </div>
+                    </div>
+
+                    <div class='row rowLine'>
+                    	<div class='col-sm-2 w3-green'>Shape (Apex):</div>
+                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafShapeApex' name='dbxleafShapeApex'></select></div>
+                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafShapeApex"></button></div>
+                        <div class='col-sm-4'>
+                            <span class='descriptionvalueleafShapeApex' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
-                    	<div class='col-sm-2'>Surface (Top):</div>
+                    	<div class='col-sm-2 w3-green'>Shape (Base):</div>
+                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafShapeBase' name='dbxleafShapeBase'></select></div>
+                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafShapeBase"></button></div>
+                        <div class='col-sm-4'>
+                            <span class='descriptionvalueleafShapeBase' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                        </div>
+                    </div>
+                    <div class='row rowLine'>
+                    	<div class='col-sm-2  w3-lime'>Surface (Top):</div>
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafSurface' name='dbxleafSurface'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafSurface"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafSurfaceInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                            <span class='descriptionvalueleafSurface' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                        </div>
+                    </div>
+
+                    <div class='row rowLine'>
+                    	<div class='col-sm-2 w3-lime'>Surface (Bottom):</div>
+                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafSurfaceBottom' name='dbxleafSurfaceBottom'></select></div>
+                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafSurfaceBottom"></button></div>
+                        <div class='col-sm-4'>
+                            <span class='descriptionvalueleafSurfaceBottom' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
@@ -120,15 +146,24 @@
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafVenation' name='dbxleafVenation'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafVenation"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafVenationInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                            <span class='descriptionvalueleafVenation' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                     <div class='row rowLine'>
-                    	<div class='col-sm-2'>Hairs (Top):</div>
+                    	<div class='col-sm-2 w3-lime'>Hairs (Top):</div>
                     	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafHairs' name='dbxleafHairs'></select></div>
                     	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafHairs"></button></div>
                         <div class='col-sm-4'>
-                            <span class='descriptionvalueleafHairsInput' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                            <span class='descriptionvalueleafHairs' class="w3-card"><i class='fa fa-pagelines'></i></span>
+                        </div>
+                    </div>
+
+                    <div class='row rowLine'>
+                    	<div class='col-sm-2 w3-lime'>Hairs (Bottom):</div>
+                    	<div class='col-sm-3'><select class = "cellObjWidth w3-select"  id='dbxleafHairsBottom' name='dbxleafHairsBottom'></select></div>
+                    	<div class='col-sm-3'><button class="morphButton w3-btn w3-round cellObjWidth" id="valueleafHairsBottom"></button></div>
+                        <div class='col-sm-4'>
+                            <span class='descriptionvalueleafHairsBottom' class="w3-card"><i class='fa fa-pagelines'></i></span>
                         </div>
                     </div>
                 </div>
