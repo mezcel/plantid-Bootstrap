@@ -34,19 +34,3 @@ h1 {
     right: 0;
     padding: 10px;
 }
-
-#addMorphologyForm{
-    /*display: none;*/
-}
-#dropDownDivs{
-    /*display: none;*/
-}
-
-.AbsoluteCenter {
-    position: absolute;
-    z-index: 15;
-    width: 50%;
-    top: 20%;
-    left: 25%;
-    padding: 20px;
-}

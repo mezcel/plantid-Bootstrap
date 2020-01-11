@@ -157,7 +157,6 @@ var switchFilterQuery = function(taffy_globalJson) {
 
 var dropdownDescriptionEventsQuery = function(classNameString, dropboxID, outputDispID, localDynamicTaffyDB) {
     $(dropboxID).change(function () {
-
         var selectedValue, morphName, morphDescription, btnName;
         var selectedValue = $(this).val();
 
@@ -167,8 +166,10 @@ var dropdownDescriptionEventsQuery = function(classNameString, dropboxID, output
         morphDescription = localDynamicTaffyDB().select(classNameString + 'Description');
 
         // dynamic description button event
+        var ckb = "#ckb" + classNameString;
         $(outputDispID).click(function(){
-            $('#dropDownDescription').html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue] + " <a href='https://www.google.com/search?q=" + morphName[selectedValue] + ", plant leaf' target='_blank'><i><u class='w3-text-blue'>online examples</u></i></a>");
+			$('#dropDownDescription').html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue] + " <a href='https://www.google.com/search?q=" + morphName[selectedValue] + ", plant leaf' target='_blank'><i><u class='w3-text-blue'>online examples</u></i></a>");
+
         });
     });
 }
@@ -225,6 +226,7 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
         if (taffy_globalJson.hasOwnProperty(key)) {
             // on the real version i would use all the taxonomy for full query
             if ((key !== 'plantclass')||(key !== 'plantorder')||(key !== 'family')||(key !== 'genus')) {
+
                 classNameString = key;
                 dropboxID = "#dbx" + key;
                 outputDispID = "#value" + classNameString;
@@ -302,6 +304,7 @@ var populateLocalHerbariumQueryDropBoxes = function(taffy_globalJson) {
     populateCbxAndDescBtn(taffy_globalJson);
 
     // create event for a fresh query when the drop box has changed value
+
     $('select').change(function() {
 		// query results
         switchFilterQuery(taffy_globalJson);
