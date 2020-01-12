@@ -849,43 +849,43 @@ var myDemoJson = {
         },
         {
             "leafShapeApexID": "1",
-            "leafShapeApexName": "acute",
-            "leafShapeApexDescription": ""
+            "leafShapeApexName": "acuminate",
+            "leafShapeApexDescription": "leaf that tapers into a long point."
         },
         {
             "leafShapeApexID": "2",
-            "leafShapeApexName": "obtuse",
-            "leafShapeApexDescription": ""
+            "leafShapeApexName": "acute",
+            "leafShapeApexDescription": "The leaf or leaflet margins taper (gradually or abruptly) to a point at the apex."
         },
         {
             "leafShapeApexID": "3",
             "leafShapeApexName": "cuspidate",
-            "leafShapeApexDescription": ""
+            "leafShapeApexDescription": "Cuspidate apices have a tip that is abruptly and sharply constricted into an elongated, sharp-pointed tip or cusp (a sharp, rigid point)."
         },
         {
             "leafShapeApexID": "4",
             "leafShapeApexName": "emarginate",
-            "leafShapeApexDescription": ""
+            "leafShapeApexDescription": "The leaf or leaflet apex is slightly to deeply notched (the leaf or leaflet apices may be obtuse to acute in overall shape)."
         },
         {
             "leafShapeApexID": "5",
             "leafShapeApexName": "mucronate",
-            "leafShapeApexDescription": ""
+            "leafShapeApexDescription": "Mucronate apices have a tip that is terminated by a short, sharp, abrupt point."
         },
         {
             "leafShapeApexID": "6",
             "leafShapeApexName": "obcordate",
-            "leafShapeApexDescription": ""
+            "leafShapeApexDescription": "heart shaped"
         },
         {
             "leafShapeApexID": "7",
             "leafShapeApexName": "obtuse",
-            "leafShapeApexDescription": ""
+            "leafShapeApexDescription": "The leaf or leaflet apex is blunt to rounded."
         },
         {
             "leafShapeApexID": "8",
             "leafShapeApexName": "truncate",
-            "leafShapeApexDescription": ""
+            "leafShapeApexDescription": "The leaf or leaflet apex is squared, as if cut-off."
         },
 	],
 	"leafShapeBase": [
@@ -897,42 +897,42 @@ var myDemoJson = {
         {
             "leafShapeBaseID": "1",
             "leafShapeBaseName": "acuminate",
-            "leafShapeBaseDescription": ""
+            "leafShapeBaseDescription": "leaf that tapers into a long point."
         },
         {
             "leafShapeBaseID": "2",
             "leafShapeBaseName": "acute",
-            "leafShapeBaseDescription": ""
+            "leafShapeBaseDescription": "The leaf or leaflet margins taper (gradually or abruptly) to a point at the apex."
         },
         {
             "leafShapeBaseID": "3",
             "leafShapeBaseName": "cordate",
-            "leafShapeBaseDescription": ""
+            "leafShapeBaseDescription": "heart shaped"
         },
         {
             "leafShapeBaseID": "4",
             "leafShapeBaseName": "hastate",
-            "leafShapeBaseDescription": ""
+            "leafShapeBaseDescription": "Triangular or shaped like an arrow, with two spreading lobes at the base."
         },
         {
             "leafShapeBaseID": "5",
             "leafShapeBaseName": "oblique",
-            "leafShapeBaseDescription": ""
+            "leafShapeBaseDescription": "Asymmetrical leaf base, with one side lower than the other."
         },
         {
             "leafShapeBaseID": "6",
             "leafShapeBaseName": "rounded",
-            "leafShapeBaseDescription": ""
+            "leafShapeBaseDescription": "Circular, no distinct point."
         },
         {
             "leafShapeBaseID": "7",
             "leafShapeBaseName": "sagittate",
-            "leafShapeBaseDescription": ""
+            "leafShapeBaseDescription": "The leaf or leaflet apex is squared, as if cut-off."
         },
         {
             "leafShapeBaseID": "8",
             "leafShapeBaseName": "truncate",
-            "leafShapeBaseDescription": ""
+            "leafShapeBaseDescription": "The leaf or leaflet apex is squared, as if cut-off."
         },
 	],
     "leafSurface": [
