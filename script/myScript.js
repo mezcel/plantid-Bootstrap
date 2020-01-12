@@ -306,25 +306,34 @@ var populateLocalHerbariumQueryDropBoxes = function(taffy_globalJson) {
     // create event for a fresh query when the drop box has changed value
 
     $('select').change(function() {
-		// query results
-        switchFilterQuery(taffy_globalJson);
+        var isSwitchOn = $("#ckb" + this.id.slice(3)).prop("checked"); // true/false
 
-        // modal popup
-        if ( $("#plantList li:nth-child(1) a:nth-child(1)").text() !== "" ){
-			// if exclusive matches are found
-			$("#queryResultModal").modal();
+		if ( isSwitchOn == true ) {
+			// query results
+			switchFilterQuery(taffy_globalJson);
+			var firstMatch = $("#plantList li:nth-child(1) a:nth-child(1)").text();
+
+			// modal popup
+			if ( firstMatch !== "" ){
+				// if exclusive matches are found
+				$("#queryResultModal").modal();
+			}
+			//$("#queryResultModal").modal();
 		}
-        //$("#queryResultModal").modal();
 
     });
 
     // create event for a query when the on/off is toggled
     $('input').change(function() {
+
+        //var isSwitchOn = this.checked; // true/false
+
 		// query results
-        switchFilterQuery(taffy_globalJson);
+		switchFilterQuery(taffy_globalJson);
+		var firstMatch = $("#plantList li:nth-child(1) a:nth-child(1)").text();
 
 		// modal popup
-        if ( $("#plantList li:nth-child(1) a:nth-child(1)").text() !== "" ){
+		if ( firstMatch !== "" ){
 			// if exclusive matches are found
 			$("#queryResultModal").modal();
 		}
