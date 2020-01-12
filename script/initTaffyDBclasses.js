@@ -841,6 +841,100 @@ var myDemoJson = {
             "leafShapeDescription": "Spatulate leaves are narrow for almost the entire leaf - but then have an abrupt round structure at the apex. similar shape to a spatula"
         }
     ],
+	"leafShapeApex": [
+        {
+            "leafShapeApexID": "0",
+            "leafShapeApexName": "--- leaf attribute ---",
+            "leafShapeApexDescription": ""
+        },
+        {
+            "leafShapeApexID": "1",
+            "leafShapeApexName": "acute",
+            "leafShapeApexDescription": ""
+        },
+        {
+            "leafShapeApexID": "2",
+            "leafShapeApexName": "obtuse",
+            "leafShapeApexDescription": ""
+        },
+        {
+            "leafShapeApexID": "3",
+            "leafShapeApexName": "cuspidate",
+            "leafShapeApexDescription": ""
+        },
+        {
+            "leafShapeApexID": "4",
+            "leafShapeApexName": "emarginate",
+            "leafShapeApexDescription": ""
+        },
+        {
+            "leafShapeApexID": "5",
+            "leafShapeApexName": "mucronate",
+            "leafShapeApexDescription": ""
+        },
+        {
+            "leafShapeApexID": "6",
+            "leafShapeApexName": "obcordate",
+            "leafShapeApexDescription": ""
+        },
+        {
+            "leafShapeApexID": "7",
+            "leafShapeApexName": "obtuse",
+            "leafShapeApexDescription": ""
+        },
+        {
+            "leafShapeApexID": "8",
+            "leafShapeApexName": "truncate",
+            "leafShapeApexDescription": ""
+        },
+	],
+	"leafShapeBase": [
+        {
+            "leafShapeBaseID": "0",
+            "leafShapeBaseName": "--- leaf attribute ---",
+            "leafShapeBaseDescription": ""
+        },
+        {
+            "leafShapeBaseID": "1",
+            "leafShapeBaseName": "acuminate",
+            "leafShapeBaseDescription": ""
+        },
+        {
+            "leafShapeBaseID": "2",
+            "leafShapeBaseName": "acute",
+            "leafShapeBaseDescription": ""
+        },
+        {
+            "leafShapeBaseID": "3",
+            "leafShapeBaseName": "cordate",
+            "leafShapeBaseDescription": ""
+        },
+        {
+            "leafShapeBaseID": "4",
+            "leafShapeBaseName": "hastate",
+            "leafShapeBaseDescription": ""
+        },
+        {
+            "leafShapeBaseID": "5",
+            "leafShapeBaseName": "oblique",
+            "leafShapeBaseDescription": ""
+        },
+        {
+            "leafShapeBaseID": "6",
+            "leafShapeBaseName": "rounded",
+            "leafShapeBaseDescription": ""
+        },
+        {
+            "leafShapeBaseID": "7",
+            "leafShapeBaseName": "sagittate",
+            "leafShapeBaseDescription": ""
+        },
+        {
+            "leafShapeBaseID": "8",
+            "leafShapeBaseName": "truncate",
+            "leafShapeBaseDescription": ""
+        },
+	],
     "leafSurface": [
         {
             "leafSurfaceID": "0",
@@ -1186,6 +1280,8 @@ var leafStructure	= TAFFY(myDemoJson.leafStructure);
 var leafMargin		= TAFFY(myDemoJson.leafMargin);
 var leafAttachment	= TAFFY(myDemoJson.leafAttachment);
 var leafShape		= TAFFY(myDemoJson.leafShape);
+var leafShapeApex	= TAFFY(myDemoJson.leafShapeApex);
+var leafShapeBase	= TAFFY(myDemoJson.leafShapeBase);
 var leafSurface		= TAFFY(myDemoJson.leafSurface);
 var leafVenation	= TAFFY(myDemoJson.leafVenation);
 var leafHairs		= TAFFY(myDemoJson.leafHairs);
@@ -1224,8 +1320,8 @@ for (i = 1; i < leafMorph_inputArr.length; i += 1) {
         "leafMargin_FK": leafMorph_inputArr[i][4], //11
         "leafAttachment_FK": leafMorph_inputArr[i][5],
         "leafShape_FK": leafMorph_inputArr[i][6],
-        "leafApex_FK": leafMorph_inputArr[i][7],
-        "leafBase_FK": leafMorph_inputArr[i][8],
+        "leafShapeApex_FK": leafMorph_inputArr[i][7],
+        "leafShapeBase_FK": leafMorph_inputArr[i][8],
         "leafSurfaceTop_FK": leafMorph_inputArr[i][9],
         "leafSurfaceBottom_FK": leafMorph_inputArr[i][10],
         "leafVenation_FK": leafMorph_inputArr[i][11],
@@ -1245,6 +1341,8 @@ myDemoJson.leafStructure = leafStructure().get();
 myDemoJson.leafMargin = leafMargin().get();
 myDemoJson.leafAttachment = leafAttachment().get();
 myDemoJson.leafShape = leafShape().get();
+myDemoJson.leafShapeApex = leafShapeApex().get();
+myDemoJson.leafShapeBase = leafShapeBase().get();
 myDemoJson.leafSurface = leafSurface().get();
 myDemoJson.leafVenation = leafVenation().get();
 myDemoJson.leafHairs = leafHairs().get();

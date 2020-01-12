@@ -249,10 +249,10 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
                     $(dropboxID).append(dbxOption);
 
 					// Extra copies of the same attribute for different parts of the leaf.
-                    if (dropboxID === "#dbxleafShape") {
+                    /*if (dropboxID === "#dbxleafShape") {
 						$(dropboxID.concat("Apex")).append(dbxOption);
 						$(dropboxID.concat("Base")).append(dbxOption);
-					}
+					}*/
 
 					if ( (dropboxID === "#dbxleafSurface") || (dropboxID === "#dbxleafHairs") ) {
 						$(dropboxID.concat("Bottom")).append(dbxOption);
@@ -263,10 +263,10 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
                         dropdownDescriptionEventsQuery(classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
 
 						// Extra copies of the same attribute for different parts of the leaf.
-                        if (dropboxID === "#dbxleafShape") {
+                        /*if (dropboxID === "#dbxleafShape") {
 							dropdownDescriptionEventsQuery(classNameString, dropboxID.concat("Apex"), outputDispID.concat("Apex"), localDynamicTaffyDB);
 							dropdownDescriptionEventsQuery(classNameString, dropboxID.concat("Base"), outputDispID.concat("Base"), localDynamicTaffyDB);
-						}
+						}*/
 
 						if ( (dropboxID === "#dbxleafSurface") || (dropboxID === "#dbxleafHairs") ) {
 							dropdownDescriptionEventsQuery(classNameString, dropboxID.concat("Bottom"), outputDispID.concat("Bottom"), localDynamicTaffyDB);
@@ -277,10 +277,10 @@ var populateCbxAndDescBtn = function(taffy_globalJson) {
                         dropdownMorphInput("", classNameString, dropboxID, outputDispID, localDynamicTaffyDB);
 
 						// Extra copies of the same attribute for different parts of the leaf.
-                        if (dropboxID === "#dbxleafShape") {
+                        /*if (dropboxID === "#dbxleafShape") {
 							dropdownMorphInput("Apex", classNameString, dropboxID.concat("Apex"), outputDispID.concat("Apex"), localDynamicTaffyDB);
 							dropdownMorphInput("Base", classNameString, dropboxID.concat("Base"), outputDispID.concat("Base"), localDynamicTaffyDB);
-						}
+						}*/
 
 
                         if ( (dropboxID === "#dbxleafSurface") || (dropboxID === "#dbxleafHairs") ) {
@@ -359,6 +359,8 @@ var jsonFile2TaffyDB = function(jsonFileVar) {
     var leafMargin = TAFFY(jsonFileVar.leafMargin);
     var leafAttachment = TAFFY(jsonFileVar.leafAttachment);
     var leafShape = TAFFY(jsonFileVar.leafShape);
+    var leafShapeApex = TAFFY(jsonFileVar.leafShapeApex);
+    var leafShapeBase = TAFFY(jsonFileVar.leafShapeBase);
     var leafSurface = TAFFY(jsonFileVar.leafSurface);
     var leafVenation = TAFFY(jsonFileVar.leafVenation);
     var leafHairs = TAFFY(jsonFileVar.leafHairs);
@@ -376,6 +378,8 @@ var jsonFile2TaffyDB = function(jsonFileVar) {
     leafMargin.store("leafMargin");
     leafAttachment.store("leafAttachment");
     leafShape.store("leafShape");
+    leafShapeApex.store("leafShapeApex");
+    leafShapeBase.store("leafShapeBase");
     leafSurface.store("leafSurface");
     leafVenation.store("leafVenation");
     leafHairs.store("leafHairs");
@@ -433,8 +437,8 @@ var inputMorphArrayDOM = function(leafMorphObjArr) {
     inputObservationObj.push({"leafMargin_FK":parseInt($("#dbxleafMargin").val())});
     inputObservationObj.push({"leafAttachment_FK" : parseInt($("#dbxleafAttachment").val())});
     inputObservationObj.push({"leafShape_FK" : parseInt($("#dbxleafShape").val())});
-    inputObservationObj.push({"leafApex_FK" : parseInt($("#dbxleafShapeApex").val())}); // unused in this example
-    inputObservationObj.push({"leafBase_FK" : parseInt($("#dbxleafShapeBase").val())}); // unused in this example
+    inputObservationObj.push({"leafShapeApex_FK" : parseInt($("#dbxleafShapeApex").val())}); // unused in this example
+    inputObservationObj.push({"leafShapeBase_FK" : parseInt($("#dbxleafShapeBase").val())}); // unused in this example
     inputObservationObj.push({"leafSurfaceTop_FK" : parseInt($("#dbxleafSurface").val())});
     inputObservationObj.push({"leafSurfaceBottom_FK" : parseInt($("#dbxleafSurfaceBottom").val())}); // unused in this example
     inputObservationObj.push({"leafVenation_FK" : parseInt($("#dbxleafVenation").val())});
@@ -455,8 +459,8 @@ var insertLeafMorphLocal = function(leafMorph) {
     dbxSelectionState["leafMargin_FK"] = parseInt($("#dbxleafMargin").val());
     dbxSelectionState["leafAttachment_FK" ] = parseInt($("#dbxleafAttachment").val());
     dbxSelectionState["leafShape_FK" ] = parseInt($("#dbxleafShape").val());
-    dbxSelectionState["leafApex_FK" ] = parseInt($("#dbxleafShapeApex").val()); // unused in this example
-    dbxSelectionState["leafBase_FK" ] = parseInt($("#dbxleafShapeBase").val()); // unused in this example
+    dbxSelectionState["leafShapeApex_FK" ] = parseInt($("#dbxleafShapeApex").val()); // unused in this example
+    dbxSelectionState["leafShapeBase_FK" ] = parseInt($("#dbxleafShapeBase").val()); // unused in this example
     dbxSelectionState["leafSurfaceTop_FK" ] = parseInt($("#dbxleafSurface").val());
     dbxSelectionState["leafSurfaceBottom_FK" ] = parseInt($("#dbxleafSurfaceBottom").val()); // unused in this example
     dbxSelectionState["leafVenation_FK" ] = parseInt($("#dbxleafVenation").val());
@@ -551,6 +555,8 @@ var initTaffyDBfromLocalStorage = function (taffy_globalJson) {
     var leafMargin = TAFFY(taffy_globalJson.leafMargin);
     var leafAttachment = TAFFY(taffy_globalJson.leafAttachment);
     var leafShape = TAFFY(taffy_globalJson.leafShape);
+    var leafShapeApex = TAFFY(taffy_globalJson.leafShapeApex);
+    var leafShapeBase = TAFFY(taffy_globalJson.leafShapeBase);
     var leafSurface = TAFFY(taffy_globalJson.leafSurface);
     var leafVenation = TAFFY(taffy_globalJson.leafVenation);
     var leafHairs = TAFFY(taffy_globalJson.leafHairs);
@@ -564,6 +570,8 @@ var initTaffyDBfromLocalStorage = function (taffy_globalJson) {
     taffy_globalJson.leafMargin = leafMargin().get();
     taffy_globalJson.leafAttachment = leafAttachment().get();
     taffy_globalJson.leafShape = leafShape().get();
+    taffy_globalJson.leafShapeApex = leafShapeApex().get();
+    taffy_globalJson.leafShapeBase = leafShapeBase().get();
     taffy_globalJson.leafSurface = leafSurface().get();
     taffy_globalJson.leafVenation = leafVenation().get();
     taffy_globalJson.leafHairs = leafHairs().get();
