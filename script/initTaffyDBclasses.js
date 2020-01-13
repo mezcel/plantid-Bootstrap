@@ -1295,7 +1295,7 @@ var leafMorph		= TAFFY(myDemoJson.leafMorph);
 var leafMorph_inputArr = [];
 
 leafMorph_inputArr[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-leafMorph_inputArr[1] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+/*leafMorph_inputArr[1] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 leafMorph_inputArr[2] = [2, 7, 1, 1, 17, 6, 24, 13, 3, 2, 0, 7, 0, 0];
 leafMorph_inputArr[3] = [3, 9, 8, 4, 8, 6, 1, 13, 3, 2, 0, 7, 0, 7];
 leafMorph_inputArr[4] = [4, 10, 8, 7, 8, 6, 1, 13, 3, 2, 0, 7, 0, 7];
@@ -1306,7 +1306,7 @@ leafMorph_inputArr[8] = [8, 14, 1, 1, 8, 6, 5, 1, 2, 9, 7, 7, 0, 21];
 leafMorph_inputArr[9] = [9, 19, 1, 1, 8, 6, 15, 13, 1, 2, 7, 7, 0, 14];
 leafMorph_inputArr[10] = [10, 19, 1, 1, 8, 6, 14, 0, 0, 2, 0, 7, 0, 0];
 leafMorph_inputArr[11] = [11, 19, 1, 1, 8, 6, 14, 0, 0, 2, 0, 7, 0, 0];
-leafMorph_inputArr[12] = [12, 8, 8, 4, 8, 8, 1, 0, 0, 0, 0, 6, 0, 0];
+leafMorph_inputArr[12] = [12, 8, 8, 4, 8, 8, 1, 0, 0, 0, 0, 6, 0, 0];*/
 
 /* insert demo value into session TaffyDB */
 var i;

@@ -165,12 +165,23 @@ var dropdownDescriptionEventsQuery = function(classNameString, dropboxID, output
 
         morphDescription = localDynamicTaffyDB().select(classNameString + 'Description');
 
+        // automatically pre-select complimentary attributes
+        if ( selectedValue == 2 ) {
+			if (outputDispID == "#valueleafSurface") {
+				$("#dbxleafHairs").val('12');
+			} else if (outputDispID == "#valueleafSurfaceBottom") {
+				$("#dbxleafHairsBottom").val('12');
+			}
+		}
+
         // dynamic description button event
         var ckb = "#ckb" + classNameString;
         $(outputDispID).click(function(){
 			$('#dropDownDescription').html("<b>" + morphName[selectedValue] + "</b>: " + morphDescription[selectedValue] + " <a href='https://www.google.com/search?q=" + morphName[selectedValue] + ", plant leaf' target='_blank'><i><u class='w3-text-blue'>online examples</u></i></a>");
 
         });
+
+
     });
 }
 
