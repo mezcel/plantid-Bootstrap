@@ -16,17 +16,15 @@
 
 	<body>
 
-		<div class="container">
-			<div class='row'>
-				<div class='col-sm-2'>
-					<button id="btnImportJson" data-toggle="modal" data-target="#importJsonModal" type="button" class="btn btn-sm btn-primary">Import JSON</button>
-				</div>
-				<div class='col-sm-10'>
-					<label for="dbxFilterHeader">Field Query: </label>
-					<select id="dbxFilterHeader"></select>
-					<span id="headingColNo"></span>
-					<input type="text" id="myInput" onkeyup="tableFilter()" placeholder="Search for cell string.." title="Type in a name">
-				</div>
+		<div class='row'>
+			<div class='col-sm-2'>
+				<button id="btnImportJson" data-toggle="modal" data-target="#importJsonModal" type="button" class="btn btn-sm btn-primary btn-block">Import JSON</button>
+			</div>
+			<div class='col-sm-10'>
+				<label for="dbxFilterHeader">Field Query: </label>
+				<select id="dbxFilterHeader"></select>
+				<span id="headingColNo"></span>
+				<input type="text" id="myInput" onkeyup="tableFilter()" placeholder="Search for cell content.." title="Type in a string">
 			</div>
 		</div>
 

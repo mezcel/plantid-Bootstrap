@@ -1,10 +1,27 @@
 /* view taffy db */
 //console.clear();
 
-var populateDbx = function(morphArray) {
+var populateDbx = function() {
+	var dbxArrayOptions = [
+		"ID",
+		"Species",
+		"Arrangement",
+		"Structure",
+		"Margin",
+		"Attachment",
+		"Shape",
+		"Shape Apex",
+		"Shape Base",
+		"Surface Top",		// top
+		"Surface Bottom",	// bottom
+		"Venation",
+		"Hairs Top",		// top
+		"Hairs Bottom"		// bottom
+		];
+
 	var option = '';
-	for (var i=0;i<morphArray.length;i++){
-	   option += '<option value="'+ i + '">' + morphArray[i] + '</option>';
+	for (var i=0; i < dbxArrayOptions.length; i++) {
+	   option += '<option value="'+ i + '">' + dbxArrayOptions[i] + '</option>';
 	}
 	$('#dbxFilterHeader').append(option);
 }
@@ -28,7 +45,7 @@ var json2table = function(taffy_globalJson) {
 			"leafHairsBottom"		// bottom
 		];
 
-	populateDbx(morphArray);
+	populateDbx();
 
 	var leafMorphJson = TAFFY(taffy_globalJson['leafMorph']);
 
