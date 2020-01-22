@@ -1,6 +1,14 @@
 /* view taffy db */
 //console.clear();
 
+var populateDbx = function(morphArray) {
+	var option = '';
+	for (var i=0;i<morphArray.length;i++){
+	   option += '<option value="'+ i + '">' + morphArray[i] + '</option>';
+	}
+	$('#dbxFilterHeader').append(option);
+}
+
 var json2table = function(taffy_globalJson) {
 
 	var morphArray = [
@@ -20,7 +28,7 @@ var json2table = function(taffy_globalJson) {
 			"leafHairsBottom"		// bottom
 		];
 
-	console.log("JSON Loaded:",taffy_globalJson);
+	populateDbx(morphArray);
 
 	var leafMorphJson = TAFFY(taffy_globalJson['leafMorph']);
 
@@ -105,6 +113,28 @@ var loadJsonFile = function() {
     }
 }
 
+function tableFilter() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput");
+	filter = input.value.toUpperCase();
+
+	table = document.getElementById("myTable");
+	tr = table.getElementsByTagName("tr");
+
+	for (i = 0; i < tr.length; i++) {
+
+		td = tr[i].getElementsByTagName("td")[$("#dbxFilterHeader").val()];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
 
 $( document ).ready(function() {
     console.log( "ready!" );
@@ -113,16 +143,3 @@ $( document ).ready(function() {
 	});
 
 });
-
-/*
-$(window).scroll(function(){
-	var sticky = $('.sticky'),
-	scroll = $(window).scrollTop();
-
-	if (scroll >= 100) {
-		sticky.addClass('fixed');
-	} else {
-		sticky.removeClass('fixed');
-	}
-});
-*/
