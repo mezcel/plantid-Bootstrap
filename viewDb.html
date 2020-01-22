@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+        <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<script src="script/jquery-3.2.1.min.js"></script>
+		<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+		<script src='script/taffy.js'></script>
+
+	<style>
+		/* css */
+
+		.tableHeader {
+			background: lime;
+		}
+
+	</style>
+
+	</head>
+
+	<body>
+		<button data-toggle="modal" data-target="#importJsonModal">Import JSON</button>
+		<h1>View: leafMorph</h1>
+
+		<table class="table table-striped">
+			<thead>
+				<tr class="tableHeader">
+					<th>ID</th>
+					<th>Plant</th>
+					<th>Arrangement</th>
+					<th>Structure</th>
+					<th>Margin</th>
+					<th>Attachment</th>
+					<th>Shape</th>
+					<th>Shape Apex</th>
+					<th>Shape Base</th>
+					<th>Surface Top</th>
+					<th>Surface Bottom</th>
+					<th>Venation</th>
+					<th>Hairs Top</th>
+					<th>Hairs Bottom</th>
+				</tr>
+			</thead>
+
+			<tbody></tbody>
+
+		</table>
+
+		<div id="demoOut"></div>
+
+		<!-- Import json modal -->
+        <div class="modal fade" id="importJsonModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Import an appropriate Json file</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>After selecting a file, click "Load" to confirm your selection.</p>
+                        <form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
+                            <div class='row'>
+                                <div class='col-sm-6' >
+                                    <input type='file' class="w3-blue w3-round" id='fileinput'>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+		<script src='script/myScript-viewDB.js'></script>
+	</body>
+</html>
