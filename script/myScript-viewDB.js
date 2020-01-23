@@ -152,11 +152,19 @@ function tableFilter() {
 	}
 }
 
+function rmRecord() {
+	console.log("click", localStorage['taffy_globalJson'] );
+}
+
 
 $( document ).ready(function() {
     console.log( "ready!" );
     $('#fileinput').change( function(){
 		loadJsonFile();
+	});
+
+	$("#btnDelRecord").click( function() {
+		rmRecord();
 	});
 
 });
