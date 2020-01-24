@@ -2,7 +2,10 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<title>View: leafMorph</title>
+        <link rel="shortcut icon" href="img/favicon.ico" />
         <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles/2016-Green-Flash.css" rel="stylesheet">
 
 		<script src="script/jquery-3.2.1.min.js"></script>
 		<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
@@ -14,27 +17,32 @@
 
 	</head>
 
-	<body>
+	<body class="w3-theme-l4">
 
 		<div class='row'>
-			<div class='col-sm-2'>
-				<button id="btnImportJson" data-toggle="modal" data-target="#importJsonModal" type="button" class="btn btn-sm btn-primary btn-block">Import JSON</button>
-				<button id="btnDelRecord">rm</button>
+			<div class='col-sm-4'>
+				<label for="dbxFilterHeader">Import JSON Database: </label>
+				<button id="btnImportJson" data-toggle="modal" data-target="#importJsonModal" type="button" class="btn btn-primary form-control">Import</button>
 			</div>
-			<div class='col-sm-10'>
+			<div class='col-sm-4'>
 				<label for="dbxFilterHeader">Field Query: </label>
-				<select id="dbxFilterHeader"></select>
-				<span id="headingColNo"></span>
-				<input type="text" id="myInput" onkeyup="tableFilter()" placeholder="Search for cell content.." title="Type in a string">
+				<select id="dbxFilterHeader" class="form-control"></select>
+				<label for="inputFilterString">Filter String: </label>
+				<input type="text" id="inputFilterString" class="form-control" onkeyup="tableFilter()" placeholder="filter string ..." title="Type in a string">
+			</div>
+			<div class='col-sm-4'>
+				<label for="inputRecordID">Record ID Number: </label>
+				<input type="text" id="inputRecordID" class="form-control" placeholder="#ID" title="Remove #ID" value=1>
+				<label for="btnDelRecord">Remove Record: </label>
+				<button id="btnDelRecord" class="btn btn-danger form-control">remove</button>
 			</div>
 		</div>
 
 		<h1>View: leafMorph</h1>
 
-		<table id="myTable" class="table table-striped table-bordered table-sm">
-
+		<table id="myTable" class="table table-striped table-bordered table-sm text-light bg-dark">
 			<thead>
-				<tr>
+				<tr class="w3-theme-d5">
 					<th>ID</th>
 					<th>Species</th>
 					<th>Arrangement</th>
@@ -51,19 +59,15 @@
 					<th>Hairs Bottom</th>
 				</tr>
 			</thead>
-
-			<tbody></tbody>
-
+			<tbody class="w3-theme-l2"></tbody>
 		</table>
-
-		<div id="demoOut"></div>
 
 		<!-- Import json modal -->
         <div class="modal fade" id="importJsonModal" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
-                <div class="modal-content">
+                <div class="modal-content  w3-theme-l5">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Import an appropriate Json file</h4>

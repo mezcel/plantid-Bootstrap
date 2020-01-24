@@ -1,4 +1,13 @@
-/* view taffy db */
+/*
+ * myScript-viewDB.js
+ *
+ * This script will:
+ * import a json file via user prompt
+ * load json into the web browser's memory storage
+ * display a query view of cataloged plant leaves
+ * delete records and update the master JSON accordingly
+ *
+ * */
 //console.clear();
 
 var populateDbx = function() {
@@ -134,7 +143,7 @@ var loadJsonFile = function() {
 
 function tableFilter() {
 	var input, filter, table, tr, td, i, txtValue;
-	input = document.getElementById("myInput");
+	input = document.getElementById("inputFilterString");
 	filter = input.value.toUpperCase();
 
 	table = document.getElementById("myTable");
@@ -155,15 +164,60 @@ function tableFilter() {
 }
 
 function rmRecord() {
-	var idxNo = 1;
 
-	console.log("rm record:", idxNo);
-	var masterDB		= JSON.parse(localStorage['taffy_globalJson']); 	// grab masterdb string
-	var taffy_globalJson = TAFFY(localStorage['taffy_globalJson']);
-	var leafMorphJson	= TAFFY(masterDB['leafMorph']);				// parse out leafMorph json
+/*
+var idxNo = 2;
+var masterDBcopy	= JSON.parse(localStorage['taffy_globalJson']);
+var taffy_globalJson = TAFFY(localStorage['taffy_globalJson']);
+var taffy_globalJson_stringify = taffy_globalJson().stringify();
+var leafMorphStringify = JSON.stringify( taffy_globalJson().select('leafMorph'));
+var taffy_leafMorph = TAFFY(leafMorphStringify);
+console.log("\nvar masterDBcopy	= JSON.parse(localStorage['taffy_globalJson']);\nvar taffy_globalJson = TAFFY(localStorage['taffy_globalJson']);\nvar taffy_globalJson_stringify = taffy_globalJson().stringify();\nvar leafMorphStringify = JSON.stringify( taffy_globalJson().select('leafMorph'));\nvar taffy_leafMorph = TAFFY(leafMorphStringify);");
+*/
 
-	leafMorphJson({leafMorphID:idxNo}).remove();	// rm record
-	taffy_globalJson('leafMorph').remove();			// rm class
+var idxNo = $("#inputRecordID").val();
+	if ( idxNo == "0" ) {
+		var recordID = {leafMorphID:0};
+	} else {
+		var recordID = {leafMorphID:parseInt(idxNo)};
+	}
+
+var masterJSON = JSON.parse(localStorage.getItem('taffy_globalJson'));	// memory string to json obj DB
+var taffy_globalJson = TAFFY(localStorage['taffy_globalJson']);
+
+var leafMorhObjArr = masterJSON.leafMorph;	// json obj DB to array of objects
+var leafMorphTaffy = TAFFY(leafMorhObjArr);	// array to taffy obj
+
+
+leafMorphTaffy(recordID).remove();
+
+console.log(leafMorphTaffy().count());
+console.log(taffy_globalJson().select('leafMorph'));
+console.log(taffy_globalJson().select('leafMargin'));
+
+taffy_globalJson('leafMargin').remove();
+
+console.log(taffy_globalJson().select('leafMorph'));
+console.log(taffy_globalJson().select('leafMargin'));
+
+
+//////////////////
+
+/*
+console.log("\nLEAF MORPH:\n");
+
+var leafMorphJson	= TAFFY(masterDBcopy['leafMorph']);	// parse out leafMorph json
+	console.log( "leafMorphJson().select()", leafMorphJson().select() );
+	console.log( "leafMorphJson().select().length", leafMorphJson().select().length );
+
+leafMorphJson({leafMorphID:idxNo}).remove();
+	console.log("---\nleafMorphJson({leafMorphID:"+idxNo+"}).remove();\n---");
+	console.log( "leafMorphJson().select()", leafMorphJson().select() );
+	console.log( "leafMorphJson().select().length", leafMorphJson().select().length );
+*/
+	//leafMorphJson({leafMorphID:idxNo}).remove();	// rm record
+	//taffy_globalJson('leafMorph').remove();			// rm class
+	//leafMorphJson.store("leafMorphJson");
 
 	// json2table(leafMorphJson);
 }
