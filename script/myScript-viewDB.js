@@ -48,6 +48,7 @@ var json2table = function(taffy_globalJson) {
 	populateDbx();
 
 	var leafMorphJson = TAFFY(taffy_globalJson['leafMorph']);
+	// leafMorphJson.store("leafMorphJson"); // web browser storage copy
 
 	for(var i = 1; i < leafMorphJson().get().length; i++) {
 
@@ -127,6 +128,7 @@ var loadJsonFile = function() {
         localStorage['taffy_globalJson'] = JSON.stringify(jsonFileVar);
 
         json2table(jsonFileVar);
+        console.log("Imported JSON:", jsonFileVar);
     }
 }
 
@@ -153,12 +155,23 @@ function tableFilter() {
 }
 
 function rmRecord() {
-	console.log("click", localStorage['taffy_globalJson'] );
+	var idxNo = 1;
+
+	console.log("rm record:", idxNo);
+	var masterDB		= JSON.parse(localStorage['taffy_globalJson']); 	// grab masterdb string
+	var taffy_globalJson = TAFFY(localStorage['taffy_globalJson']);
+	var leafMorphJson	= TAFFY(masterDB['leafMorph']);				// parse out leafMorph json
+
+	leafMorphJson({leafMorphID:idxNo}).remove();	// rm record
+	taffy_globalJson('leafMorph').remove();			// rm class
+
+	// json2table(leafMorphJson);
 }
 
+// Init Event
 
 $( document ).ready(function() {
-    console.log( "ready!" );
+    console.log( "Jq/DOM document is ready!" );
     $('#fileinput').change( function(){
 		loadJsonFile();
 	});
