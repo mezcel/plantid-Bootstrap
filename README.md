@@ -36,15 +36,38 @@ I use TaffyDB as my "nosql" ER-like workaround
         * MAAN
 
 ## Note:
+
 * this seems like a usable nice stop point
 
 ## Dependencies:
-* GUI - Bootstrap
-* DB - JS/JSON
-* query Engine - TaffyDB - [taffydb](http://taffydb.com/)
-* easy fix to remove array duplicates - [underscorejs](http://underscorejs.org/#uniq)
 
-## Demo:
+* GUI - Bootstrap 3 [Bootstrap 3.4.1](https://getbootstrap.com/docs/3.4/getting-started/#download)
+* Database - JSON
+* Platform - Jquery
+* Database Engine - TaffyDB - [taffydb](http://taffydb.com/)
+* fix array duplicates - [underscorejs](http://underscorejs.org/#uniq)
+* DOM Textarea configuration - [autosize.js](http://www.jacklmoore.com/autosize/)
+
+#### External Resources Source Code:
+```sh
+## jquery 3.4.1
+git clone https://github.com/jquery/jquery-dist.git
+
+## underscore.js
+git clone https://github.com/jashkenas/underscore.git
+
+## taffydb
+git clone https://github.com/typicaljoe/taffydb.git
+
+## autosize.js
+git clone https://github.com/jackmoore/autosize.git
+
+## Bootstrap 3.4.1
+wget https://github.com/twbs/bootstrap/releases/download/v3.4.1/bootstrap-3.4.1-dist.zip
+
+```
+
+## Outdated Demo:
 
 > [Youtube](https://www.youtube.com/watch?v=d6cYrqyCk4o) this was a demo on the first test run
 
