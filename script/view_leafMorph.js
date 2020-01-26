@@ -195,6 +195,10 @@ $( document ).ready(function() {
 		loadJsonFile();
 	});
 
+	$("#dbxFilterHeader").change( function() {
+		$("#inputFilterString").val("");
+	});
+
 	$("#btnDelRecord").click( function() {
 		if ($("#inputRecordID").val() !== "") {
 			rmRecord();
@@ -205,7 +209,6 @@ $( document ).ready(function() {
 			var jsonFileVar = JSON.parse(localStorage['taffy_globalJson']);
 			json2table(jsonFileVar);
 		}
-
 	});
 
 });
