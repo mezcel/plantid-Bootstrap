@@ -57,7 +57,6 @@ var json2table = function(taffy_globalJson) {
 	populateDbx();
 
 	var leafMorphJson = TAFFY(taffy_globalJson['leafMorph']);
-	// leafMorphJson.store("leafMorphJson"); // web browser storage copy
 
 	for(var i = 1; i < leafMorphJson().get().length; i++) {
 
@@ -97,7 +96,6 @@ var json2table = function(taffy_globalJson) {
 		}
 
 		$("tbody").append(newTR);
-
 	}
 
 }
@@ -137,7 +135,6 @@ var loadJsonFile = function() {
         localStorage['taffy_globalJson'] = JSON.stringify(jsonFileVar);
 
         json2table(jsonFileVar);
-        console.log("Imported JSON:", jsonFileVar);
     }
 }
 
@@ -165,61 +162,29 @@ function tableFilter() {
 
 function rmRecord() {
 
-/*
-var idxNo = 2;
-var masterDBcopy	= JSON.parse(localStorage['taffy_globalJson']);
-var taffy_globalJson = TAFFY(localStorage['taffy_globalJson']);
-var taffy_globalJson_stringify = taffy_globalJson().stringify();
-var leafMorphStringify = JSON.stringify( taffy_globalJson().select('leafMorph'));
-var taffy_leafMorph = TAFFY(leafMorphStringify);
-console.log("\nvar masterDBcopy	= JSON.parse(localStorage['taffy_globalJson']);\nvar taffy_globalJson = TAFFY(localStorage['taffy_globalJson']);\nvar taffy_globalJson_stringify = taffy_globalJson().stringify();\nvar leafMorphStringify = JSON.stringify( taffy_globalJson().select('leafMorph'));\nvar taffy_leafMorph = TAFFY(leafMorphStringify);");
-*/
-
-var idxNo = $("#inputRecordID").val();
+	var idxNo = $("#inputRecordID").val();
 	if ( idxNo == "0" ) {
 		var recordID = {leafMorphID:0};
 	} else {
 		var recordID = {leafMorphID:parseInt(idxNo)};
 	}
 
-var masterJSON = JSON.parse(localStorage.getItem('taffy_globalJson'));	// memory string to json obj DB
-var taffy_globalJson = TAFFY(localStorage['taffy_globalJson']);
+	var masterJSON = JSON.parse(localStorage.getItem('taffy_globalJson'));	// memory string to json obj DB
+	var taffy_globalJson = TAFFY(localStorage['taffy_globalJson']);			// TAFFY
 
-var leafMorhObjArr = masterJSON.leafMorph;	// json obj DB to array of objects
-var leafMorphTaffy = TAFFY(leafMorhObjArr);	// array to taffy obj
+	var leafMorhObjArr = masterJSON.leafMorph;	// json obj DB to array of objects
+	var leafMorphTaffy = TAFFY(leafMorhObjArr);	// array to taffy obj
 
+	leafMorphTaffy(recordID).remove();			// remove leafMorph record
 
-leafMorphTaffy(recordID).remove();
+	var leafMorphStringify = leafMorphTaffy().stringify();	// string new leafMorph
+	var leafMorphJSON = JSON.parse(leafMorphStringify);		// make a leafMorph json
 
-console.log(leafMorphTaffy().count());
-console.log(taffy_globalJson().select('leafMorph'));
-console.log(taffy_globalJson().select('leafMargin'));
-
-taffy_globalJson('leafMargin').remove();
-
-console.log(taffy_globalJson().select('leafMorph'));
-console.log(taffy_globalJson().select('leafMargin'));
+	delete masterJSON.leafMorph;							// delete old leafmorph from masterJSON
+	masterJSON.leafMorph = leafMorphJSON;					// add new leafMorph jseon masterJSON
 
 
-//////////////////
-
-/*
-console.log("\nLEAF MORPH:\n");
-
-var leafMorphJson	= TAFFY(masterDBcopy['leafMorph']);	// parse out leafMorph json
-	console.log( "leafMorphJson().select()", leafMorphJson().select() );
-	console.log( "leafMorphJson().select().length", leafMorphJson().select().length );
-
-leafMorphJson({leafMorphID:idxNo}).remove();
-	console.log("---\nleafMorphJson({leafMorphID:"+idxNo+"}).remove();\n---");
-	console.log( "leafMorphJson().select()", leafMorphJson().select() );
-	console.log( "leafMorphJson().select().length", leafMorphJson().select().length );
-*/
-	//leafMorphJson({leafMorphID:idxNo}).remove();	// rm record
-	//taffy_globalJson('leafMorph').remove();			// rm class
-	//leafMorphJson.store("leafMorphJson");
-
-	// json2table(leafMorphJson);
+	localStorage['taffy_globalJson'] = JSON.stringify(masterJSON); // convert json into storage string
 }
 
 // Init Event
@@ -231,7 +196,16 @@ $( document ).ready(function() {
 	});
 
 	$("#btnDelRecord").click( function() {
-		rmRecord();
+		if ($("#inputRecordID").val() !== "") {
+			rmRecord();
+
+			$("#inputRecordID").val("");
+			$("tbody").empty();
+
+			var jsonFileVar = JSON.parse(localStorage['taffy_globalJson']);
+			json2table(jsonFileVar);
+		}
+
 	});
 
 });
