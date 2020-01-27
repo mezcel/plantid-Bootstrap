@@ -7,9 +7,9 @@
         <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet">
     	<link href="font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
-    	<link href="styles/w3.css" rel="stylesheet">
+    	<link href="myStyles/w3.css" rel="stylesheet">
         <link href="bootstrap-toggle/bootstrap-toggle.min.css" rel="stylesheet">
-        <link href="styles/myStyle.css" rel="stylesheet">
+        <link href="myStyles/myStyle.css" rel="stylesheet">
 
         <script src="jquery-dist/dist/jquery.min.js"></script>
 		<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
@@ -29,25 +29,28 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a ><h1>Leaf Morphology</h1></a>
+                    <a><h1>Leaf Morphology</h1></a>
                 </div>
                 <div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
                             <li><a href="addObservation.html" class="w3-text-white">Add Observation <i class="fa fa-plus-circle"></i></a></li>
                             <li><a href="javascript:void(0)" data-toggle="modal" data-target="#importJsonModal" class="w3-text-white">Import JSON <i class="fa fa-database"></i></a></li>
-                            <li class="dropdown"><a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">info <i class="fa fa-info-circle"></i><span class="caret"></span></a>
-                                <ul class="dropdown-menu w3-text-white">
-                                    <li><a href="" data-toggle="modal" data-target="#morphologyInstructions">Instructions</a></li>
-                                    <li><a href="http://mezcel.wixsite.com/plantmorphology" target="_blank">Wiki</a></li>
-                                    <li><a href="http://mezcel.wixsite.com/plantmorphology/dendrology" target="_blank">Leaf Observations</a></li>
-                                    <li><a href="http://mezcel.wixsite.com/plantmorphology/herbaruim-database" target="_blank" >Herbarium</a></li>
-                                    <li><a href="http://www.github.com/mezcel/plantid-Bootstrap" target="_blank" class="w3-white">Github</a></li>
+
+                            <li class="dropdown">
+								<a class="dropdown-toggle w3-text-white" data-toggle="dropdown" href="#">Info <i class="fa fa-info-circle"></i><span class="caret"></span></a>
+                                <ul class="dropdown-menu w3-lime w3-text-white">
+                                    <li><a href="" data-toggle="modal" data-target="#morphologyInstructions" class="w3-hover-green w3-text-black">Instructions</a></li>
+                                    <li><a href="http://mezcel.wixsite.com/plantmorphology" target="_blank" class="w3-hover-green w3-text-black">Wiki</a></li>
+                                    <li><a href="http://mezcel.wixsite.com/plantmorphology/dendrology" target="_blank" class="w3-hover-green w3-text-black">Leaf Observations</a></li>
+                                    <li><a href="http://mezcel.wixsite.com/plantmorphology/herbaruim-database" target="_blank" class="w3-hover-green w3-text-black">Herbarium</a></li>
+                                    <li><a href="http://www.github.com/mezcel/plantid-Bootstrap" target="_blank" class="w3-hover-green w3-text-black">Github</a></li>
                                 </ul>
                             </li>
+
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="" class="myhomelink w3-text-white"><i class="fa fa-home"></i></a></li>
+                            <li><a href="index.html" class="myhomelink w3-text-white"><i class="fa fa-home"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -272,7 +275,7 @@
 		</div>
 
         <!-- my scripts -->
-        <script src='script/myScript.js'></script> <!-- my function library -->
+        <script src='myScript/myScript.js'></script> <!-- my function library -->
         <script>
             $(document).ready(function() {
                 pageMain();

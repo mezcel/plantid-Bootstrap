@@ -1,5 +1,5 @@
 /*
- * myScript-viewDB.js
+ * myScript/myScript-viewDB.js
  *
  * This script will:
  * import a json file via user prompt

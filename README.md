@@ -1,5 +1,5 @@
 # plantid-Bootstrap
-### A scaled down bootstrap version of a similar [C# plant identification app](https://github.com/mezcel/plantid) I made a while back.
+### A scaled down Bootstrap version of a similar [C# plant identification app](https://github.com/mezcel/plantid) I made a while back.
 
 I use TaffyDB as my "nosql" ER-like workaround
 
@@ -21,7 +21,7 @@ I use TaffyDB as my "nosql" ER-like workaround
     * i mismatched my hand written data entry
     * this is a usecase not a legit bio-app... yet
     * this is a quick... yet tedious fix
-* Enclosed is a Demo Proof of concept testbench JSON titled ```fieldTestExample.json```
+* Enclosed is a Demo Proof of concept testbench JSON titled ```demoDatabase.json```
     * The json was made using this app
     * I did it really quick only using my eyes and memory of biology terms
     * it is not intended to resemble the reality of taxonomic observation. Sometimes in real situations the same species is seen having different yet similar traits. Over many samples, the trends and averages tend to normalize consistency.
@@ -62,9 +62,11 @@ git clone https://github.com/typicaljoe/taffydb.git
 ## autosize.js
 git clone https://github.com/jackmoore/autosize.git
 
+## w3.css
+git clone https://github.com/JaniRefsnes/w3css.git
+
 ## Bootstrap 3.4.1
 wget https://github.com/twbs/bootstrap/releases/download/v3.4.1/bootstrap-3.4.1-dist.zip
-
 ```
 
 ## Outdated Demo:

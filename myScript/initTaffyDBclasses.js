@@ -1,5 +1,10 @@
-/* Clar all browser storage*/
-localStorage.clear();
+/*
+ * myScript/initTaffyDBclasses.js
+ *
+ * general database template
+ * */
+
+localStorage.clear(); // Clar all browser storage
 
 var myDemoJson = {
     "plantclass": [

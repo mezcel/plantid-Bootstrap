@@ -1,4 +1,7 @@
-/*  README
+/*
+	myScript/myScript.js
+
+	README
     DOM UI Initializations
 
     Name scheme of the dropboxes:
