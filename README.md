@@ -67,6 +67,9 @@ git clone https://github.com/JaniRefsnes/w3css.git
 
 ## Bootstrap 3.4.1
 wget https://github.com/twbs/bootstrap/releases/download/v3.4.1/bootstrap-3.4.1-dist.zip
+
+## Font Awesome 4.7
+wget https://fontawesome.com/v4.7.0/assets/font-awesome-4.7.0.zip
 ```
 
 ## Outdated Demo:
