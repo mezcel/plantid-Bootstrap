@@ -4,8 +4,10 @@
  * general database template
  * */
 
-localStorage.clear(); // Clar all browser storage
+localStorage.clear(); // Clar all browser storage memory
 
+// manually define json database template
+// leafMorph is empty except for a default value
 var myDemoJson = {
     "plantclass": [
         {

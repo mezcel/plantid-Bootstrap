@@ -644,7 +644,7 @@ var populateDOMObjects = function(taffy_globalJson){
     });
 }
 
-var pageMain = function(){
+var populateDOMstorageDB = function(){
     // get json from last localStorage definition
     var taffy_globalJson = JSON.parse(localStorage.getItem('taffy_globalJson'));
 

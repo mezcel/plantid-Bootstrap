@@ -8,6 +8,7 @@
  * delete records and update the master JSON accordingly
  *
  * */
+
 //console.clear();
 
 var populateDbx = function() {
@@ -95,7 +96,7 @@ var json2table = function(taffy_globalJson) {
 			newTR.append(newTD);
 		}
 
-		$("tbody").append(newTR);
+		$("#tableBody").append(newTR);
 	}
 
 }
@@ -138,7 +139,7 @@ var loadJsonFile = function() {
     }
 }
 
-function tableFilter() {
+function tableViewFilter() {
 	var input, filter, table, tr, td, i, txtValue;
 	input = document.getElementById("inputFilterString");
 	filter = input.value.toUpperCase();
@@ -200,11 +201,12 @@ $( document ).ready(function() {
 	});
 
 	$("#btnDelRecord").click( function() {
+		$("#inputFilterString").val("");
 		if ($("#inputRecordID").val() !== "") {
 			rmRecord();
 
 			$("#inputRecordID").val("");
-			$("tbody").empty();
+			$("#tableBody").empty();
 
 			var jsonFileVar = JSON.parse(localStorage['taffy_globalJson']);
 			json2table(jsonFileVar);

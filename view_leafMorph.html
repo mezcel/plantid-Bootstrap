@@ -29,7 +29,7 @@
 				<label for="dbxFilterHeader">Field Query: </label>
 				<select id="dbxFilterHeader" class="form-control"></select>
 				<label for="inputFilterString">Filter String: </label>
-				<input type="text" id="inputFilterString" class="form-control" onkeyup="tableFilter()" placeholder="filter string ..." title="Type in a string">
+				<input type="text" id="inputFilterString" class="form-control" onkeyup="tableViewFilter()" placeholder="filter string ..." title="Type in a string">
 			</div>
 			<div class='col-sm-4'>
 				<label for="inputRecordID">Record ID Number: </label>
@@ -60,7 +60,7 @@
 					<th>Hairs Bottom</th>
 				</tr>
 			</thead>
-			<tbody class="w3-theme-l2"></tbody>
+			<tbody id="tableBody" class="w3-theme-l2"></tbody>
 		</table>
 
 		<!-- Import json modal -->
