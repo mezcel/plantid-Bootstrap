@@ -14,9 +14,9 @@
         <script src="jquery-dist/dist/jquery.min.js"></script>
 		<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
         <script src="bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
-        <script src='taffydb/taffy-min.js'></script>
-        <script src='underscore/underscore-min.js'></script>
-        <script src='autosize/dist/autosize.min.js'></script>
+        <script src="taffydb/taffy-min.js"></script>
+        <script src="underscore/underscore-min.js"></script>
+        <script src="autosize/dist/autosize.min.js"></script>
     </head>
 
     <body>
@@ -34,7 +34,7 @@
                 <div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="addObservation.html" class="w3-text-white">Add Observation <i class="fa fa-plus-circle"></i></a></li>
+                            <li><a href="addObservation.html" class="w3-text-white">Add Observation to DB <i class="fa fa-plus-circle"></i></a></li>
                             <li><a href="javascript:void(0)" data-toggle="modal" data-target="#importJsonModal" class="w3-text-white">Import JSON <i class="fa fa-database"></i></a></li>
 
                             <li class="dropdown">
@@ -275,12 +275,7 @@
 		</div>
 
         <!-- my scripts -->
-        <script src='myScript/myScript.js'></script> <!-- my function library -->
-        <script>
-            $(document).ready(function() {
-				// Populate DOM with JSON saved in browser storage
-                populateDOMstorageDB();
-            });
-        </script>
+        <!-- <script src='myScript/myScript.js'></script> <!--  my function library -->
+        <script src="myScript/plantid_query.js"></script> <!-- my function library -->
     </body>
 </html>
