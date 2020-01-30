@@ -1,13 +1,34 @@
 /*
  * myScript/initTaffyDBclasses.js
  *
- * general database template
+ * About:
+ *
+ * 1. Clear Browser storage
+ * 2. Define a template JSON db variable
+ * 		This variable is used as either a default or a demo DB
+ * 		It will be overwritten if you import a JSON file.
+ * 3. Divide Json into smaller objects
+ * 		This make the file easier to debug
+ * 		Uses TAFFY Objects
+ * 4. Define leaf morphology for specific plant leaves
+ * 		Array of FKs
+ * 		Demo Values for leafMorph ER Class
+ * 5. Rebuild the JSON DB with the cutsom plant leaves
+ * 6. Save JSON in the web browser memory for easy global access.
+ * 		Other html pages will use the DB save in browser storage
+ *
  * */
 
-localStorage.clear(); // Clar all browser storage memory
+/*
+ * ## 1. Clear Browser storage
+ * */
 
-// manually define json database template
-// leafMorph is empty except for a default value
+localStorage.clear();
+
+/*
+ * ## 2. Define a template JSON db variable
+ * */
+
 var myDemoJson = {
     "plantclass": [
         {
@@ -1274,8 +1295,9 @@ var myDemoJson = {
     ]
 }
 
-/* ************* Define Session TaffyDB ******************* */
-//break myDemoJson down into TaffyDB ER-like classes
+/*
+ * ## 3. Divide Json into smaller objects
+ * */
 
 var plantclass		= TAFFY(myDemoJson.plantclass);
 var plantorder		= TAFFY(myDemoJson.plantorder);
@@ -1294,11 +1316,10 @@ var leafVenation	= TAFFY(myDemoJson.leafVenation);
 var leafHairs		= TAFFY(myDemoJson.leafHairs);
 var leafMorph		= TAFFY(myDemoJson.leafMorph);
 
+/*
+ * ## 4. Define leaf morphology for specific plant leaves
+ * */
 
-
-/* ************* Make Demo Values for leafMorph ER Class ******************* */
-
-/* define demo input values in an array */
 var leafMorph_inputArr = [];
 
 leafMorph_inputArr[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -1322,40 +1343,47 @@ for (i = 1; i < leafMorph_inputArr.length; i += 1) {
         "leafMorphID": leafMorph_inputArr[i][0],
         "species_FK": leafMorph_inputArr[i][1],
 
-        "leafArrangement_FK": leafMorph_inputArr[i][2], //1
-        "leafStructure_FK": leafMorph_inputArr[i][3],
-        "leafMargin_FK": leafMorph_inputArr[i][4], //11
-        "leafAttachment_FK": leafMorph_inputArr[i][5],
-        "leafShape_FK": leafMorph_inputArr[i][6],
-        "leafShapeApex_FK": leafMorph_inputArr[i][7],
-        "leafShapeBase_FK": leafMorph_inputArr[i][8],
-        "leafSurfaceTop_FK": leafMorph_inputArr[i][9],
-        "leafSurfaceBottom_FK": leafMorph_inputArr[i][10],
-        "leafVenation_FK": leafMorph_inputArr[i][11],
-        "leafHairsTop_FK": leafMorph_inputArr[i][12],
-        "leafHairsBottom_FK": leafMorph_inputArr[i][13]
+        "leafArrangement_FK":	leafMorph_inputArr[i][2],	//1
+        "leafStructure_FK":		leafMorph_inputArr[i][3],
+        "leafMargin_FK":		leafMorph_inputArr[i][4],	//11
+        "leafAttachment_FK":	leafMorph_inputArr[i][5],
+        "leafShape_FK":			leafMorph_inputArr[i][6],
+        "leafShapeApex_FK":		leafMorph_inputArr[i][7],
+        "leafShapeBase_FK":		leafMorph_inputArr[i][8],
+        "leafSurfaceTop_FK":	leafMorph_inputArr[i][9],
+        "leafSurfaceBottom_FK":	leafMorph_inputArr[i][10],
+        "leafVenation_FK":		leafMorph_inputArr[i][11],
+        "leafHairsTop_FK":		leafMorph_inputArr[i][12],
+        "leafHairsBottom_FK":	leafMorph_inputArr[i][13]
     });
 }
 
-// Update and Overwrite Demo myDemoJson
-myDemoJson.plantclass = plantclass().get();
-myDemoJson.plantorder = plantorder().get();
-myDemoJson.family = family().get();
-myDemoJson.genus = genus().get();
-myDemoJson.species = species().get();
-myDemoJson.leafArrangement = leafArrangement().get();
-myDemoJson.leafStructure = leafStructure().get();
-myDemoJson.leafMargin = leafMargin().get();
-myDemoJson.leafAttachment = leafAttachment().get();
-myDemoJson.leafShape = leafShape().get();
-myDemoJson.leafShapeApex = leafShapeApex().get();
-myDemoJson.leafShapeBase = leafShapeBase().get();
-myDemoJson.leafSurface = leafSurface().get();
-myDemoJson.leafVenation = leafVenation().get();
-myDemoJson.leafHairs = leafHairs().get();
-myDemoJson.leafMorph = leafMorph().get();
+/*
+ * ## 5. Rebuild the JSON DB with the cutsom plant leaves
+ * */
 
-// Save json to localStorage to pass between web pages
+myDemoJson.plantclass	= plantclass().get();
+myDemoJson.plantorder	= plantorder().get();
+myDemoJson.family		= family().get();
+myDemoJson.genus		= genus().get();
+myDemoJson.species		= species().get();
+myDemoJson.leafArrangement	= leafArrangement().get();
+myDemoJson.leafStructure	= leafStructure().get();
+myDemoJson.leafMargin		= leafMargin().get();
+myDemoJson.leafAttachment	= leafAttachment().get();
+myDemoJson.leafShape		= leafShape().get();
+myDemoJson.leafShapeApex	= leafShapeApex().get();
+myDemoJson.leafShapeBase	= leafShapeBase().get();
+myDemoJson.leafSurface		= leafSurface().get();
+myDemoJson.leafVenation		= leafVenation().get();
+myDemoJson.leafHairs		= leafHairs().get();
+myDemoJson.leafMorph		= leafMorph().get();
+
+/*
+ * ## 6. Save JSON in the web browser memory for easy global access.
+ * */
+
 localStorage.setItem('taffy_globalJson', JSON.stringify(myDemoJson));
 var taffy_globalJson = JSON.parse(localStorage.getItem('taffy_globalJson'));
-console.log("taffy_globalJson",taffy_globalJson);
+
+console.log("Initial DB with an empty leafMorph: taffy_globalJson",taffy_globalJson);
